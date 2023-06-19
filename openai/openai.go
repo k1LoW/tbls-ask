@@ -118,11 +118,16 @@ func databaseVersion(s *schema.Schema) string {
 		n = "MySQL"
 	case "sqlite":
 		n = "SQLite"
+	case "postgres":
+		n = "PostgreSQL"
 	default:
-		return ""
+		n = s.Driver.Name
 	}
 	if s.Driver.DatabaseVersion != "" {
 		n += " " + s.Driver.DatabaseVersion
+	}
+	if n == "" {
+		n = "unknown"
 	}
 	return fmt.Sprintf("Database is %s.", n)
 }
