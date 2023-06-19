@@ -6,14 +6,14 @@
 
 tbls-ask is provided as an external subcommand of [tbls](https://github.com/k1LoW/tbls).
 
-### Ask
+### Ask OpenAI
 
 ``` console
 $ tbls ask --dsn 'mysql://user:pass@localhost:3306/wordpress' which is blog comment table?
 The blog comment table in the given DDL is `wp_comments`.
 ```
 
-### Ask query
+### Ask OpenAI for query
 
 ``` console
 $ tbls ask --query --dsn 'mysql://user:pass@localhost:3306/wordpress' count blog posts per user per month
