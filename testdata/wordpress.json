@@ -1,0 +1,1378 @@
+{
+  "name": "wordpress",
+  "desc": "",
+  "tables": [
+    {
+      "name": "wp_commentmeta",
+      "type": "BASE TABLE",
+      "comment": "",
+      "columns": [
+        {
+          "name": "meta_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": null,
+          "comment": "",
+          "extra_def": "auto_increment"
+        },
+        {
+          "name": "comment_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "meta_key",
+          "type": "varchar(255)",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "meta_value",
+          "type": "longtext",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "comment_id",
+          "def": "KEY comment_id (comment_id) USING BTREE",
+          "table": "wp_commentmeta",
+          "columns": [
+            "comment_id"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "meta_key",
+          "def": "KEY meta_key (meta_key) USING BTREE",
+          "table": "wp_commentmeta",
+          "columns": [
+            "meta_key"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (meta_id) USING BTREE",
+          "table": "wp_commentmeta",
+          "columns": [
+            "meta_id"
+          ],
+          "comment": ""
+        }
+      ],
+      "constraints": [
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (meta_id)",
+          "table": "wp_commentmeta",
+          "referenced_table": null,
+          "columns": [
+            "meta_id"
+          ],
+          "referenced_columns": null,
+          "comment": ""
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE `wp_commentmeta` (\n  `meta_id` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `comment_id` bigint unsigned NOT NULL DEFAULT '0',\n  `meta_key` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,\n  `meta_value` longtext COLLATE utf8mb4_unicode_520_ci,\n  PRIMARY KEY (`meta_id`),\n  KEY `comment_id` (`comment_id`),\n  KEY `meta_key` (`meta_key`(191))\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci"
+    },
+    {
+      "name": "wp_comments",
+      "type": "BASE TABLE",
+      "comment": "",
+      "columns": [
+        {
+          "name": "comment_ID",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": null,
+          "comment": "",
+          "extra_def": "auto_increment"
+        },
+        {
+          "name": "comment_post_ID",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "comment_author",
+          "type": "tinytext",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "comment_author_email",
+          "type": "varchar(100)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "comment_author_url",
+          "type": "varchar(200)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "comment_author_IP",
+          "type": "varchar(100)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "comment_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": "0000-00-00 00:00:00",
+          "comment": ""
+        },
+        {
+          "name": "comment_date_gmt",
+          "type": "datetime",
+          "nullable": false,
+          "default": "0000-00-00 00:00:00",
+          "comment": ""
+        },
+        {
+          "name": "comment_content",
+          "type": "text",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "comment_karma",
+          "type": "int",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "comment_approved",
+          "type": "varchar(20)",
+          "nullable": false,
+          "default": "1",
+          "comment": ""
+        },
+        {
+          "name": "comment_agent",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "comment_type",
+          "type": "varchar(20)",
+          "nullable": false,
+          "default": "comment",
+          "comment": ""
+        },
+        {
+          "name": "comment_parent",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "user_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "comment_approved_date_gmt",
+          "def": "KEY comment_approved_date_gmt (comment_approved, comment_date_gmt) USING BTREE",
+          "table": "wp_comments",
+          "columns": [
+            "comment_approved",
+            "comment_date_gmt"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "comment_author_email",
+          "def": "KEY comment_author_email (comment_author_email) USING BTREE",
+          "table": "wp_comments",
+          "columns": [
+            "comment_author_email"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "comment_date_gmt",
+          "def": "KEY comment_date_gmt (comment_date_gmt) USING BTREE",
+          "table": "wp_comments",
+          "columns": [
+            "comment_date_gmt"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "comment_parent",
+          "def": "KEY comment_parent (comment_parent) USING BTREE",
+          "table": "wp_comments",
+          "columns": [
+            "comment_parent"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "comment_post_ID",
+          "def": "KEY comment_post_ID (comment_post_ID) USING BTREE",
+          "table": "wp_comments",
+          "columns": [
+            "comment_post_ID"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (comment_ID) USING BTREE",
+          "table": "wp_comments",
+          "columns": [
+            "comment_ID"
+          ],
+          "comment": ""
+        }
+      ],
+      "constraints": [
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (comment_ID)",
+          "table": "wp_comments",
+          "referenced_table": null,
+          "columns": [
+            "comment_ID"
+          ],
+          "referenced_columns": null,
+          "comment": ""
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE `wp_comments` (\n  `comment_ID` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `comment_post_ID` bigint unsigned NOT NULL DEFAULT '0',\n  `comment_author` tinytext COLLATE utf8mb4_unicode_520_ci NOT NULL,\n  `comment_author_email` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `comment_author_url` varchar(200) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `comment_author_IP` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `comment_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',\n  `comment_date_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',\n  `comment_content` text COLLATE utf8mb4_unicode_520_ci NOT NULL,\n  `comment_karma` int NOT NULL DEFAULT '0',\n  `comment_approved` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '1',\n  `comment_agent` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `comment_type` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'comment',\n  `comment_parent` bigint unsigned NOT NULL DEFAULT '0',\n  `user_id` bigint unsigned NOT NULL DEFAULT '0',\n  PRIMARY KEY (`comment_ID`),\n  KEY `comment_post_ID` (`comment_post_ID`),\n  KEY `comment_approved_date_gmt` (`comment_approved`,`comment_date_gmt`),\n  KEY `comment_date_gmt` (`comment_date_gmt`),\n  KEY `comment_parent` (`comment_parent`),\n  KEY `comment_author_email` (`comment_author_email`(10))\n) ENGINE=InnoDB AUTO_INCREMENT=[Redacted by tbls] DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci"
+    },
+    {
+      "name": "wp_links",
+      "type": "BASE TABLE",
+      "comment": "",
+      "columns": [
+        {
+          "name": "link_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": null,
+          "comment": "",
+          "extra_def": "auto_increment"
+        },
+        {
+          "name": "link_url",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "link_name",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "link_image",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "link_target",
+          "type": "varchar(25)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "link_description",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "link_visible",
+          "type": "varchar(20)",
+          "nullable": false,
+          "default": "Y",
+          "comment": ""
+        },
+        {
+          "name": "link_owner",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": "1",
+          "comment": ""
+        },
+        {
+          "name": "link_rating",
+          "type": "int",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "link_updated",
+          "type": "datetime",
+          "nullable": false,
+          "default": "0000-00-00 00:00:00",
+          "comment": ""
+        },
+        {
+          "name": "link_rel",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "link_notes",
+          "type": "mediumtext",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "link_rss",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "link_visible",
+          "def": "KEY link_visible (link_visible) USING BTREE",
+          "table": "wp_links",
+          "columns": [
+            "link_visible"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (link_id) USING BTREE",
+          "table": "wp_links",
+          "columns": [
+            "link_id"
+          ],
+          "comment": ""
+        }
+      ],
+      "constraints": [
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (link_id)",
+          "table": "wp_links",
+          "referenced_table": null,
+          "columns": [
+            "link_id"
+          ],
+          "referenced_columns": null,
+          "comment": ""
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE `wp_links` (\n  `link_id` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `link_url` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `link_name` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `link_image` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `link_target` varchar(25) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `link_description` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `link_visible` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'Y',\n  `link_owner` bigint unsigned NOT NULL DEFAULT '1',\n  `link_rating` int NOT NULL DEFAULT '0',\n  `link_updated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',\n  `link_rel` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `link_notes` mediumtext COLLATE utf8mb4_unicode_520_ci NOT NULL,\n  `link_rss` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  PRIMARY KEY (`link_id`),\n  KEY `link_visible` (`link_visible`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci"
+    },
+    {
+      "name": "wp_options",
+      "type": "BASE TABLE",
+      "comment": "",
+      "columns": [
+        {
+          "name": "option_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": null,
+          "comment": "",
+          "extra_def": "auto_increment"
+        },
+        {
+          "name": "option_name",
+          "type": "varchar(191)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "option_value",
+          "type": "longtext",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "autoload",
+          "type": "varchar(20)",
+          "nullable": false,
+          "default": "yes",
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "autoload",
+          "def": "KEY autoload (autoload) USING BTREE",
+          "table": "wp_options",
+          "columns": [
+            "autoload"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (option_id) USING BTREE",
+          "table": "wp_options",
+          "columns": [
+            "option_id"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "option_name",
+          "def": "UNIQUE KEY option_name (option_name) USING BTREE",
+          "table": "wp_options",
+          "columns": [
+            "option_name"
+          ],
+          "comment": ""
+        }
+      ],
+      "constraints": [
+        {
+          "name": "option_name",
+          "type": "UNIQUE",
+          "def": "UNIQUE KEY option_name (option_name)",
+          "table": "wp_options",
+          "referenced_table": null,
+          "columns": [
+            "option_name"
+          ],
+          "referenced_columns": null,
+          "comment": ""
+        },
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (option_id)",
+          "table": "wp_options",
+          "referenced_table": null,
+          "columns": [
+            "option_id"
+          ],
+          "referenced_columns": null,
+          "comment": ""
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE `wp_options` (\n  `option_id` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `option_name` varchar(191) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `option_value` longtext COLLATE utf8mb4_unicode_520_ci NOT NULL,\n  `autoload` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'yes',\n  PRIMARY KEY (`option_id`),\n  UNIQUE KEY `option_name` (`option_name`),\n  KEY `autoload` (`autoload`)\n) ENGINE=InnoDB AUTO_INCREMENT=[Redacted by tbls] DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci"
+    },
+    {
+      "name": "wp_postmeta",
+      "type": "BASE TABLE",
+      "comment": "",
+      "columns": [
+        {
+          "name": "meta_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": null,
+          "comment": "",
+          "extra_def": "auto_increment"
+        },
+        {
+          "name": "post_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "meta_key",
+          "type": "varchar(255)",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "meta_value",
+          "type": "longtext",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "meta_key",
+          "def": "KEY meta_key (meta_key) USING BTREE",
+          "table": "wp_postmeta",
+          "columns": [
+            "meta_key"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "post_id",
+          "def": "KEY post_id (post_id) USING BTREE",
+          "table": "wp_postmeta",
+          "columns": [
+            "post_id"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (meta_id) USING BTREE",
+          "table": "wp_postmeta",
+          "columns": [
+            "meta_id"
+          ],
+          "comment": ""
+        }
+      ],
+      "constraints": [
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (meta_id)",
+          "table": "wp_postmeta",
+          "referenced_table": null,
+          "columns": [
+            "meta_id"
+          ],
+          "referenced_columns": null,
+          "comment": ""
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE `wp_postmeta` (\n  `meta_id` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `post_id` bigint unsigned NOT NULL DEFAULT '0',\n  `meta_key` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,\n  `meta_value` longtext COLLATE utf8mb4_unicode_520_ci,\n  PRIMARY KEY (`meta_id`),\n  KEY `post_id` (`post_id`),\n  KEY `meta_key` (`meta_key`(191))\n) ENGINE=InnoDB AUTO_INCREMENT=[Redacted by tbls] DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci"
+    },
+    {
+      "name": "wp_posts",
+      "type": "BASE TABLE",
+      "comment": "",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": null,
+          "comment": "",
+          "extra_def": "auto_increment"
+        },
+        {
+          "name": "post_author",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "post_date",
+          "type": "datetime",
+          "nullable": false,
+          "default": "0000-00-00 00:00:00",
+          "comment": ""
+        },
+        {
+          "name": "post_date_gmt",
+          "type": "datetime",
+          "nullable": false,
+          "default": "0000-00-00 00:00:00",
+          "comment": ""
+        },
+        {
+          "name": "post_content",
+          "type": "longtext",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "post_title",
+          "type": "text",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "post_excerpt",
+          "type": "text",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "post_status",
+          "type": "varchar(20)",
+          "nullable": false,
+          "default": "publish",
+          "comment": ""
+        },
+        {
+          "name": "comment_status",
+          "type": "varchar(20)",
+          "nullable": false,
+          "default": "open",
+          "comment": ""
+        },
+        {
+          "name": "ping_status",
+          "type": "varchar(20)",
+          "nullable": false,
+          "default": "open",
+          "comment": ""
+        },
+        {
+          "name": "post_password",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "post_name",
+          "type": "varchar(200)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "to_ping",
+          "type": "text",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "pinged",
+          "type": "text",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "post_modified",
+          "type": "datetime",
+          "nullable": false,
+          "default": "0000-00-00 00:00:00",
+          "comment": ""
+        },
+        {
+          "name": "post_modified_gmt",
+          "type": "datetime",
+          "nullable": false,
+          "default": "0000-00-00 00:00:00",
+          "comment": ""
+        },
+        {
+          "name": "post_content_filtered",
+          "type": "longtext",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "post_parent",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "guid",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "menu_order",
+          "type": "int",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "post_type",
+          "type": "varchar(20)",
+          "nullable": false,
+          "default": "post",
+          "comment": ""
+        },
+        {
+          "name": "post_mime_type",
+          "type": "varchar(100)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "comment_count",
+          "type": "bigint",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "post_author",
+          "def": "KEY post_author (post_author) USING BTREE",
+          "table": "wp_posts",
+          "columns": [
+            "post_author"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "post_name",
+          "def": "KEY post_name (post_name) USING BTREE",
+          "table": "wp_posts",
+          "columns": [
+            "post_name"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "post_parent",
+          "def": "KEY post_parent (post_parent) USING BTREE",
+          "table": "wp_posts",
+          "columns": [
+            "post_parent"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "type_status_date",
+          "def": "KEY type_status_date (post_type, post_status, post_date, ID) USING BTREE",
+          "table": "wp_posts",
+          "columns": [
+            "post_type",
+            "post_status",
+            "post_date",
+            "ID"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (ID) USING BTREE",
+          "table": "wp_posts",
+          "columns": [
+            "ID"
+          ],
+          "comment": ""
+        }
+      ],
+      "constraints": [
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (ID)",
+          "table": "wp_posts",
+          "referenced_table": null,
+          "columns": [
+            "ID"
+          ],
+          "referenced_columns": null,
+          "comment": ""
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE `wp_posts` (\n  `ID` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `post_author` bigint unsigned NOT NULL DEFAULT '0',\n  `post_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',\n  `post_date_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',\n  `post_content` longtext COLLATE utf8mb4_unicode_520_ci NOT NULL,\n  `post_title` text COLLATE utf8mb4_unicode_520_ci NOT NULL,\n  `post_excerpt` text COLLATE utf8mb4_unicode_520_ci NOT NULL,\n  `post_status` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'publish',\n  `comment_status` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'open',\n  `ping_status` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'open',\n  `post_password` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `post_name` varchar(200) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `to_ping` text COLLATE utf8mb4_unicode_520_ci NOT NULL,\n  `pinged` text COLLATE utf8mb4_unicode_520_ci NOT NULL,\n  `post_modified` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',\n  `post_modified_gmt` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',\n  `post_content_filtered` longtext COLLATE utf8mb4_unicode_520_ci NOT NULL,\n  `post_parent` bigint unsigned NOT NULL DEFAULT '0',\n  `guid` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `menu_order` int NOT NULL DEFAULT '0',\n  `post_type` varchar(20) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT 'post',\n  `post_mime_type` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `comment_count` bigint NOT NULL DEFAULT '0',\n  PRIMARY KEY (`ID`),\n  KEY `post_name` (`post_name`(191)),\n  KEY `type_status_date` (`post_type`,`post_status`,`post_date`,`ID`),\n  KEY `post_parent` (`post_parent`),\n  KEY `post_author` (`post_author`)\n) ENGINE=InnoDB AUTO_INCREMENT=[Redacted by tbls] DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci"
+    },
+    {
+      "name": "wp_term_relationships",
+      "type": "BASE TABLE",
+      "comment": "",
+      "columns": [
+        {
+          "name": "object_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "term_taxonomy_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "term_order",
+          "type": "int",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "term_taxonomy_id",
+          "def": "KEY term_taxonomy_id (term_taxonomy_id) USING BTREE",
+          "table": "wp_term_relationships",
+          "columns": [
+            "term_taxonomy_id"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (object_id, term_taxonomy_id) USING BTREE",
+          "table": "wp_term_relationships",
+          "columns": [
+            "object_id",
+            "term_taxonomy_id"
+          ],
+          "comment": ""
+        }
+      ],
+      "constraints": [
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (object_id, term_taxonomy_id)",
+          "table": "wp_term_relationships",
+          "referenced_table": null,
+          "columns": [
+            "object_id",
+            "term_taxonomy_id"
+          ],
+          "referenced_columns": null,
+          "comment": ""
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE `wp_term_relationships` (\n  `object_id` bigint unsigned NOT NULL DEFAULT '0',\n  `term_taxonomy_id` bigint unsigned NOT NULL DEFAULT '0',\n  `term_order` int NOT NULL DEFAULT '0',\n  PRIMARY KEY (`object_id`,`term_taxonomy_id`),\n  KEY `term_taxonomy_id` (`term_taxonomy_id`)\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci"
+    },
+    {
+      "name": "wp_term_taxonomy",
+      "type": "BASE TABLE",
+      "comment": "",
+      "columns": [
+        {
+          "name": "term_taxonomy_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": null,
+          "comment": "",
+          "extra_def": "auto_increment"
+        },
+        {
+          "name": "term_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "taxonomy",
+          "type": "varchar(32)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "description",
+          "type": "longtext",
+          "nullable": false,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "parent",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "count",
+          "type": "bigint",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "taxonomy",
+          "def": "KEY taxonomy (taxonomy) USING BTREE",
+          "table": "wp_term_taxonomy",
+          "columns": [
+            "taxonomy"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (term_taxonomy_id) USING BTREE",
+          "table": "wp_term_taxonomy",
+          "columns": [
+            "term_taxonomy_id"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "term_id_taxonomy",
+          "def": "UNIQUE KEY term_id_taxonomy (term_id, taxonomy) USING BTREE",
+          "table": "wp_term_taxonomy",
+          "columns": [
+            "term_id",
+            "taxonomy"
+          ],
+          "comment": ""
+        }
+      ],
+      "constraints": [
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (term_taxonomy_id)",
+          "table": "wp_term_taxonomy",
+          "referenced_table": null,
+          "columns": [
+            "term_taxonomy_id"
+          ],
+          "referenced_columns": null,
+          "comment": ""
+        },
+        {
+          "name": "term_id_taxonomy",
+          "type": "UNIQUE",
+          "def": "UNIQUE KEY term_id_taxonomy (term_id, taxonomy)",
+          "table": "wp_term_taxonomy",
+          "referenced_table": null,
+          "columns": [
+            "term_id",
+            "taxonomy"
+          ],
+          "referenced_columns": null,
+          "comment": ""
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE `wp_term_taxonomy` (\n  `term_taxonomy_id` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `term_id` bigint unsigned NOT NULL DEFAULT '0',\n  `taxonomy` varchar(32) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `description` longtext COLLATE utf8mb4_unicode_520_ci NOT NULL,\n  `parent` bigint unsigned NOT NULL DEFAULT '0',\n  `count` bigint NOT NULL DEFAULT '0',\n  PRIMARY KEY (`term_taxonomy_id`),\n  UNIQUE KEY `term_id_taxonomy` (`term_id`,`taxonomy`),\n  KEY `taxonomy` (`taxonomy`)\n) ENGINE=InnoDB AUTO_INCREMENT=[Redacted by tbls] DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci"
+    },
+    {
+      "name": "wp_termmeta",
+      "type": "BASE TABLE",
+      "comment": "",
+      "columns": [
+        {
+          "name": "meta_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": null,
+          "comment": "",
+          "extra_def": "auto_increment"
+        },
+        {
+          "name": "term_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "meta_key",
+          "type": "varchar(255)",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "meta_value",
+          "type": "longtext",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "meta_key",
+          "def": "KEY meta_key (meta_key) USING BTREE",
+          "table": "wp_termmeta",
+          "columns": [
+            "meta_key"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "term_id",
+          "def": "KEY term_id (term_id) USING BTREE",
+          "table": "wp_termmeta",
+          "columns": [
+            "term_id"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (meta_id) USING BTREE",
+          "table": "wp_termmeta",
+          "columns": [
+            "meta_id"
+          ],
+          "comment": ""
+        }
+      ],
+      "constraints": [
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (meta_id)",
+          "table": "wp_termmeta",
+          "referenced_table": null,
+          "columns": [
+            "meta_id"
+          ],
+          "referenced_columns": null,
+          "comment": ""
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE `wp_termmeta` (\n  `meta_id` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `term_id` bigint unsigned NOT NULL DEFAULT '0',\n  `meta_key` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,\n  `meta_value` longtext COLLATE utf8mb4_unicode_520_ci,\n  PRIMARY KEY (`meta_id`),\n  KEY `term_id` (`term_id`),\n  KEY `meta_key` (`meta_key`(191))\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci"
+    },
+    {
+      "name": "wp_terms",
+      "type": "BASE TABLE",
+      "comment": "",
+      "columns": [
+        {
+          "name": "term_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": null,
+          "comment": "",
+          "extra_def": "auto_increment"
+        },
+        {
+          "name": "name",
+          "type": "varchar(200)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "slug",
+          "type": "varchar(200)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "term_group",
+          "type": "bigint",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "name",
+          "def": "KEY name (name) USING BTREE",
+          "table": "wp_terms",
+          "columns": [
+            "name"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "slug",
+          "def": "KEY slug (slug) USING BTREE",
+          "table": "wp_terms",
+          "columns": [
+            "slug"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (term_id) USING BTREE",
+          "table": "wp_terms",
+          "columns": [
+            "term_id"
+          ],
+          "comment": ""
+        }
+      ],
+      "constraints": [
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (term_id)",
+          "table": "wp_terms",
+          "referenced_table": null,
+          "columns": [
+            "term_id"
+          ],
+          "referenced_columns": null,
+          "comment": ""
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE `wp_terms` (\n  `term_id` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `name` varchar(200) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `slug` varchar(200) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `term_group` bigint NOT NULL DEFAULT '0',\n  PRIMARY KEY (`term_id`),\n  KEY `slug` (`slug`(191)),\n  KEY `name` (`name`(191))\n) ENGINE=InnoDB AUTO_INCREMENT=[Redacted by tbls] DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci"
+    },
+    {
+      "name": "wp_usermeta",
+      "type": "BASE TABLE",
+      "comment": "",
+      "columns": [
+        {
+          "name": "umeta_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": null,
+          "comment": "",
+          "extra_def": "auto_increment"
+        },
+        {
+          "name": "user_id",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "meta_key",
+          "type": "varchar(255)",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        },
+        {
+          "name": "meta_value",
+          "type": "longtext",
+          "nullable": true,
+          "default": null,
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "meta_key",
+          "def": "KEY meta_key (meta_key) USING BTREE",
+          "table": "wp_usermeta",
+          "columns": [
+            "meta_key"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "user_id",
+          "def": "KEY user_id (user_id) USING BTREE",
+          "table": "wp_usermeta",
+          "columns": [
+            "user_id"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (umeta_id) USING BTREE",
+          "table": "wp_usermeta",
+          "columns": [
+            "umeta_id"
+          ],
+          "comment": ""
+        }
+      ],
+      "constraints": [
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (umeta_id)",
+          "table": "wp_usermeta",
+          "referenced_table": null,
+          "columns": [
+            "umeta_id"
+          ],
+          "referenced_columns": null,
+          "comment": ""
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE `wp_usermeta` (\n  `umeta_id` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `user_id` bigint unsigned NOT NULL DEFAULT '0',\n  `meta_key` varchar(255) COLLATE utf8mb4_unicode_520_ci DEFAULT NULL,\n  `meta_value` longtext COLLATE utf8mb4_unicode_520_ci,\n  PRIMARY KEY (`umeta_id`),\n  KEY `user_id` (`user_id`),\n  KEY `meta_key` (`meta_key`(191))\n) ENGINE=InnoDB AUTO_INCREMENT=[Redacted by tbls] DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci"
+    },
+    {
+      "name": "wp_users",
+      "type": "BASE TABLE",
+      "comment": "",
+      "columns": [
+        {
+          "name": "ID",
+          "type": "bigint unsigned",
+          "nullable": false,
+          "default": null,
+          "comment": "",
+          "extra_def": "auto_increment"
+        },
+        {
+          "name": "user_login",
+          "type": "varchar(60)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "user_pass",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "user_nicename",
+          "type": "varchar(50)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "user_email",
+          "type": "varchar(100)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "user_url",
+          "type": "varchar(100)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "user_registered",
+          "type": "datetime",
+          "nullable": false,
+          "default": "0000-00-00 00:00:00",
+          "comment": ""
+        },
+        {
+          "name": "user_activation_key",
+          "type": "varchar(255)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        },
+        {
+          "name": "user_status",
+          "type": "int",
+          "nullable": false,
+          "default": "0",
+          "comment": ""
+        },
+        {
+          "name": "display_name",
+          "type": "varchar(250)",
+          "nullable": false,
+          "default": "",
+          "comment": ""
+        }
+      ],
+      "indexes": [
+        {
+          "name": "user_email",
+          "def": "KEY user_email (user_email) USING BTREE",
+          "table": "wp_users",
+          "columns": [
+            "user_email"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "user_login_key",
+          "def": "KEY user_login_key (user_login) USING BTREE",
+          "table": "wp_users",
+          "columns": [
+            "user_login"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "user_nicename",
+          "def": "KEY user_nicename (user_nicename) USING BTREE",
+          "table": "wp_users",
+          "columns": [
+            "user_nicename"
+          ],
+          "comment": ""
+        },
+        {
+          "name": "PRIMARY",
+          "def": "PRIMARY KEY (ID) USING BTREE",
+          "table": "wp_users",
+          "columns": [
+            "ID"
+          ],
+          "comment": ""
+        }
+      ],
+      "constraints": [
+        {
+          "name": "PRIMARY",
+          "type": "PRIMARY KEY",
+          "def": "PRIMARY KEY (ID)",
+          "table": "wp_users",
+          "referenced_table": null,
+          "columns": [
+            "ID"
+          ],
+          "referenced_columns": null,
+          "comment": ""
+        }
+      ],
+      "triggers": [],
+      "def": "CREATE TABLE `wp_users` (\n  `ID` bigint unsigned NOT NULL AUTO_INCREMENT,\n  `user_login` varchar(60) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `user_pass` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `user_nicename` varchar(50) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `user_email` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `user_url` varchar(100) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `user_registered` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',\n  `user_activation_key` varchar(255) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  `user_status` int NOT NULL DEFAULT '0',\n  `display_name` varchar(250) COLLATE utf8mb4_unicode_520_ci NOT NULL DEFAULT '',\n  PRIMARY KEY (`ID`),\n  KEY `user_login_key` (`user_login`),\n  KEY `user_nicename` (`user_nicename`),\n  KEY `user_email` (`user_email`)\n) ENGINE=InnoDB AUTO_INCREMENT=[Redacted by tbls] DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_520_ci"
+    }
+  ],
+  "relations": [],
+  "functions": [],
+  "driver": {
+    "name": "mysql",
+    "database_version": "8.0.33",
+    "meta": {
+      "dict": {
+        "Functions": "Stored procedures and functions"
+      }
+    }
+  }
+}

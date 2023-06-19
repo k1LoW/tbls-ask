@@ -1,0 +1,63 @@
+before:
+  hooks:
+    - go mod download
+    - go mod tidy
+builds:
+-
+  id: tbls-ask-linux
+  env:
+    - CGO_ENABLED=0
+  goos:
+    - linux
+  goarch:
+    - amd64
+    - arm64
+  ldflags:
+    - -s -w -X github.com/k1LoW/tbls-ask.version={{.Version}} -X github.com/k1LoW/tbls-ask.commit={{.FullCommit}} -X github.com/k1LoW/tbls-ask.date={{.Date}} -X github.com/k1LoW/tbls-ask/version.Version={{.Version}}
+-
+  id: tbls-ask-darwin
+  env:
+    - CGO_ENABLED=0
+  goos:
+    - darwin
+  goarch:
+    - amd64
+    - arm64
+  ldflags:
+    - -s -w -X github.com/k1LoW/tbls-ask.version={{.Version}} -X github.com/k1LoW/tbls-ask.commit={{.FullCommit}} -X github.com/k1LoW/tbls-ask.date={{.Date}} -X github.com/k1LoW/tbls-ask/version.Version={{.Version}}
+archives:
+-
+  id: tbls-ask-archive
+  name_template: '{{ .ProjectName }}_v{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+  format_overrides:
+    - goos: darwin
+      format: zip
+  files:
+    - LICENSE
+    - CREDITS
+    - README.md
+    - CHANGELOG.md
+  rlcp: true
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ .Version }}-next"
+changelog:
+  skip: true
+nfpms:
+  -
+    id: tbls-ask-nfpms
+    file_name_template: "{{ .ProjectName }}_{{ .Version }}-1_{{ .Arch }}"
+    builds:
+    - tbls-ask-linux
+    homepage: https://github.com/k1LoW/tbls-ask
+    maintainer: Ken'ichiro Oyama <k1lowxb@gmail.com>
+    description: tbls-ask is an external subcommand of tbls for asking AI using tbls to the datasource.
+    license: MIT
+    formats:
+      - deb
+      - rpm
+    dependencies:
+      - tbls
+    bindir: /usr/bin
+    epoch: 1
