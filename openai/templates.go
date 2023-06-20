@@ -47,9 +47,7 @@ func generateDDLRoughly(s *schema.Schema) string {
 			if c.Default.String != "" {
 				d += fmt.Sprintf(" DEFAULT %s", c.Default.String)
 			}
-			if c.Nullable {
-				d += " NULL"
-			} else {
+			if !c.Nullable {
 				d += " NOT NULL"
 			}
 			if c.Comment != "" {
@@ -71,7 +69,11 @@ func generateDDLRoughly(s *schema.Schema) string {
 			}
 		}
 		ddl += fmt.Sprintf("%s\n", strings.Join(td, ",\n"))
-		ddl += fmt.Sprintf(") COMMENT = %q;\n\n", t.Comment)
+		if t.Comment != "" {
+			ddl += fmt.Sprintf(") COMMENT = %q;\n\n", t.Comment)
+		} else {
+			ddl += ");\n\n"
+		}
 	}
 	return ddl
 }
