@@ -15,8 +15,10 @@ The blog comment table in the given DDL is `wp_comments`.
 
 ### Ask OpenAI for query
 
+Use `--query` option.
+
 ``` console
-$ tbls ask --query --dsn 'mysql://user:pass@localhost:3306/wordpress' count blog posts per user per month
+$ tbls ask --query --dsn 'json://path/to/wordpress/schema.json' count blog posts per user per month
 SELECT
     YEAR(p.post_date) AS `Year`,
     MONTH(p.post_date) AS `Month`,
