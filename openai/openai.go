@@ -50,7 +50,8 @@ func (o *OpenAI) Ask(ctx context.Context, q string, s *schema.Schema) (string, e
 		return "", err
 	}
 	res, err := o.client.CreateChatCompletion(ctx, openai.ChatCompletionRequest{
-		Model: o.model,
+		Model:       o.model,
+		Temperature: 0.5, // https://community.openai.com/t/cheat-sheet-mastering-temperature-and-top-p-in-chatgpt-api-a-few-tips-and-tricks-on-controlling-the-creativity-deterministic-output-of-prompt-responses/172683
 		Messages: []openai.ChatCompletionMessage{
 			{
 				Role:    openai.ChatMessageRoleUser,
@@ -81,7 +82,8 @@ func (o *OpenAI) AskQuery(ctx context.Context, q string, s *schema.Schema) (stri
 		return "", err
 	}
 	res, err := o.client.CreateChatCompletion(ctx, openai.ChatCompletionRequest{
-		Model: o.model,
+		Model:       o.model,
+		Temperature: 0.2, // https://community.openai.com/t/cheat-sheet-mastering-temperature-and-top-p-in-chatgpt-api-a-few-tips-and-tricks-on-controlling-the-creativity-deterministic-output-of-prompt-responses/172683
 		Messages: []openai.ChatCompletionMessage{
 			{
 				Role:    openai.ChatMessageRoleUser,
