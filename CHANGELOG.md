@@ -1,5 +1,7 @@
 # Changelog
 
+## [v0.0.5](https://github.com/k1LoW/tbls-ask/compare/v0.0.4...v0.0.5) - 2023-11-07
+
 ## [v0.0.4](https://github.com/k1LoW/tbls-ask/compare/v0.0.3...v0.0.4) - 2023-10-12
 ### Other Changes
 - Bump google.golang.org/grpc from 1.51.0 to 1.53.0 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/5
