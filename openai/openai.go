@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	DefaultModelChat = openai.GPT3Dot5Turbo16K0613
+	DefaultModelChat = "gpt-4-1106-preview"
 	quoteStart       = "```sql"
 	quoteEnd         = "```"
 )
