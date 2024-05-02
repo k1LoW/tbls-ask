@@ -40,10 +40,10 @@ func generateDDLRoughly(s *schema.Schema) string {
 		if t.Type == "VIEW" {
 			continue
 		}
-		ddl += fmt.Sprintf("CREATE TABLE %s (\n", t.Name)
+		ddl += fmt.Sprintf("CREATE TABLE %s (", t.Name)
 		td := []string{}
 		for _, c := range t.Columns {
-			d := fmt.Sprintf("  %s %s", c.Name, c.Type)
+			d := fmt.Sprintf("%s %s", c.Name, c.Type)
 			if c.Default.String != "" {
 				d += fmt.Sprintf(" DEFAULT %s", c.Default.String)
 			}
@@ -56,7 +56,7 @@ func generateDDLRoughly(s *schema.Schema) string {
 			td = append(td, d)
 		}
 		for _, i := range t.Indexes {
-			d := fmt.Sprintf("  %s", i.Def)
+			d := i.Def
 			td = append(td, d)
 		}
 		for _, c := range t.Constraints {
@@ -64,15 +64,15 @@ func generateDDLRoughly(s *schema.Schema) string {
 			case "PRIMARY KEY", "UNIQUE KEY":
 				continue
 			default:
-				d := fmt.Sprintf("  CONSTRAINT %s", c.Def)
+				d := fmt.Sprintf(" CONSTRAINT %s", c.Def)
 				td = append(td, d)
 			}
 		}
-		ddl += fmt.Sprintf("%s\n", strings.Join(td, ",\n"))
+		ddl += strings.Join(td, ",")
 		if t.Comment != "" {
-			ddl += fmt.Sprintf(") COMMENT = %q;\n\n", t.Comment)
+			ddl += fmt.Sprintf(") COMMENT = %q;\n", t.Comment)
 		} else {
-			ddl += ");\n\n"
+			ddl += ");\n"
 		}
 	}
 	return ddl
