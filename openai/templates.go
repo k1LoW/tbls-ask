@@ -70,9 +70,9 @@ func generateDDLRoughly(s *schema.Schema) string {
 		}
 		ddl += strings.Join(td, ",")
 		if t.Comment != "" {
-			ddl += fmt.Sprintf(") COMMENT = %q;\n", t.Comment)
+			ddl += fmt.Sprintf(") COMMENT = %q;", t.Comment)
 		} else {
-			ddl += ");\n"
+			ddl += ");"
 		}
 	}
 	return ddl
