@@ -41,5 +41,7 @@ $ tbls ask --dsn 'mysql://user:pass@localhost:3306/wordpress' --model gemini-pro
 
 ## Requirement
 
+Either OpenAI or Gemini API key is required.
+
 - `OPENAI_API_KEY` ... API Key of OpenAI.
-- `GEMINI_API_KEY` ... API Key of Gemini.(optional)
+- `GEMINI_API_KEY` ... API Key of Gemini.
