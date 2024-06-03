@@ -1,5 +1,14 @@
 # Changelog
 
+## [v0.0.6](https://github.com/k1LoW/tbls-ask/compare/v0.0.5...v0.0.6) - 2024-06-03
+### Other Changes
+- Bump golang.org/x/crypto from 0.14.0 to 0.17.0 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/11
+- Bump google.golang.org/grpc from 1.53.0 to 1.56.3 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/8
+- Bump github.com/dvsekhvalnov/jose2go from 1.5.0 to 1.6.0 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/12
+- Bump google.golang.org/protobuf from 1.30.0 to 1.33.0 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/13
+- Bump golang.org/x/net from 0.17.0 to 0.23.0 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/14
+- Update default chat model to "gpt-4o". by @kromiii in https://github.com/k1LoW/tbls-ask/pull/16
+
 ## [v0.0.5](https://github.com/k1LoW/tbls-ask/compare/v0.0.4...v0.0.5) - 2023-11-07
 
 ## [v0.0.4](https://github.com/k1LoW/tbls-ask/compare/v0.0.3...v0.0.4) - 2023-10-12
