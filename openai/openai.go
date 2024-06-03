@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	DefaultModelChat = "gpt-4-1106-preview"
+	DefaultModelChat = "gpt-4o"
 	quoteStart       = "```sql"
 	quoteEnd         = "```"
 )
