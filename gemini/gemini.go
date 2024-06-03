@@ -11,6 +11,7 @@ import (
 	"github.com/google/generative-ai-go/genai"
 	"github.com/k1LoW/tbls/config"
 	"github.com/k1LoW/tbls/datasource"
+	"github.com/k1LoW/tbls-ask/templates"
 	"google.golang.org/api/option"
 )
 
@@ -33,17 +34,17 @@ func Ask(query string, path string) string {
 		return "Failed to analyze schema"
 	}
 
-	tpl, err := template.New("").Parse(defaultPromtTmpl)
+	tpl, err := template.New("").Parse(templates.DefaultPromtTmpl)
 	if err != nil {
 		log.Printf("Failed to parse template: %v", err)
 		return "Failed to parse template"
 	}
 	buf := new(bytes.Buffer)
 	if err := tpl.Execute(buf, map[string]any{
-		"DatabaseVersion": databaseVersion(s),
+		"DatabaseVersion": templates.DatabaseVersion(s),
 		"QuoteStart":      "```sql",
 		"QuoteEnd":        "```",
-		"DDL":             generateDDLRoughly(s),
+		"DDL":             templates.GenerateDDLRoughly(s),
 		// "Question":        query,
 	}); err != nil {
 		log.Printf("Failed to execute template: %v", err)
@@ -51,19 +52,7 @@ func Ask(query string, path string) string {
 	}
 
 	model := client.GenerativeModel("gemini-pro")
-	cs := model.StartChat()
-	cs.History = []*genai.Content{
-		{
-			Role:  "user",
-			Parts: []genai.Part{genai.Text(buf.String())},
-		},
-		{
-			Role:  "model",
-			Parts: []genai.Part{genai.Text("質問を入力してください")},
-		},
-	}
-	resp, err := cs.SendMessage(ctx, genai.Text(query))
-	// resp, err := model.GenerateContent(ctx, genai.Text(buf.String()))
+	resp, err := model.GenerateContent(ctx, genai.Text(buf.String()))
 	if err != nil {
 		log.Printf("Failed to generate content: %v", err)
 		return "Failed to generate content"

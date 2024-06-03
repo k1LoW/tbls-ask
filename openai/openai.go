@@ -10,6 +10,7 @@ import (
 	"github.com/k1LoW/repin"
 	"github.com/k1LoW/tbls/schema"
 	"github.com/sashabaranov/go-openai"
+	"github.com/k1LoW/tbls-ask/templates"
 )
 
 const (
@@ -29,8 +30,8 @@ func New(key, model string) *OpenAI {
 	return &OpenAI{
 		client:          openai.NewClient(key),
 		model:           model,
-		promptTmpl:      defaultPromtTmpl,
-		queryPromptTmpl: defaultQueryPromptTmpl,
+		promptTmpl:      templates.DefaultPromtTmpl,
+		queryPromptTmpl: templates.DefaultQueryPromptTmpl,
 	}
 }
 
@@ -41,10 +42,10 @@ func (o *OpenAI) Ask(ctx context.Context, q string, s *schema.Schema) (string, e
 	}
 	buf := new(bytes.Buffer)
 	if err := tpl.Execute(buf, map[string]any{
-		"DatabaseVersion": databaseVersion(s),
+		"DatabaseVersion": templates.DatabaseVersion(s),
 		"QuoteStart":      quoteStart,
 		"QuoteEnd":        quoteEnd,
-		"DDL":             generateDDLRoughly(s),
+		"DDL":             templates.GenerateDDLRoughly(s),
 		"Question":        q,
 	}); err != nil {
 		return "", err
@@ -73,10 +74,10 @@ func (o *OpenAI) AskQuery(ctx context.Context, q string, s *schema.Schema) (stri
 	}
 	buf := new(bytes.Buffer)
 	if err := tpl.Execute(buf, map[string]any{
-		"DatabaseVersion": databaseVersion(s),
+		"DatabaseVersion": templates.DatabaseVersion(s),
 		"QuoteStart":      quoteStart,
 		"QuoteEnd":        quoteEnd,
-		"DDL":             generateDDLRoughly(s),
+		"DDL":             templates.GenerateDDLRoughly(s),
 		"Question":        q,
 	}); err != nil {
 		return "", err
@@ -111,25 +112,4 @@ func (o *OpenAI) SetPromtTmpl(t string) {
 
 func (o *OpenAI) SetQueryPromtTmpl(t string) {
 	o.queryPromptTmpl = t
-}
-
-func databaseVersion(s *schema.Schema) string {
-	var n string
-	switch s.Driver.Name {
-	case "mysql":
-		n = "MySQL"
-	case "sqlite":
-		n = "SQLite"
-	case "postgres":
-		n = "PostgreSQL"
-	default:
-		n = s.Driver.Name
-	}
-	if s.Driver.DatabaseVersion != "" {
-		n += " " + s.Driver.DatabaseVersion
-	}
-	if n == "" {
-		n = "unknown"
-	}
-	return fmt.Sprintf("Database is %s.", n)
 }
