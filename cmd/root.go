@@ -57,8 +57,8 @@ type Model interface {
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:          "tbls-ask",
-	Short:        "ask LLM using the datasource",
-	Long:         `ask LLM using the datasource.`,
+	Short:        "ask OpenAI (or Gemini) using the datasource",
+	Long:         `ask OpenAI (or Gemini) using the datasource.`,
 	SilenceUsage: true,
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 		switch {
