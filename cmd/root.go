@@ -30,6 +30,7 @@ import (
 	"os"
 	"strings"
 
+	"github.com/k1LoW/tbls-ask/gemini"
 	"github.com/k1LoW/tbls-ask/openai"
 	"github.com/k1LoW/tbls-ask/version"
 	"github.com/k1LoW/tbls/datasource"
@@ -47,15 +48,30 @@ var (
 	labels   []string
 )
 
+// Model interface for asking questions
+type Model interface {
+	Ask(ctx context.Context, q string, s *schema.Schema) (string, error)
+	AskQuery(ctx context.Context, q string, s *schema.Schema) (string, error)
+}
+
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:          "tbls-ask",
-	Short:        "ask OpenAI using the datasource",
-	Long:         `ask OpenAI using the datasource.`,
+	Short:        "ask OpenAI (or Gemini) using the datasource",
+	Long:         `ask OpenAI (or Gemini) using the datasource.`,
 	SilenceUsage: true,
 	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-		if os.Getenv("OPENAI_API_KEY") == "" {
-			return errors.New("OPENAI_API_KEY is not set")
+		switch {
+		case strings.HasPrefix(model, "gpt"):
+			if os.Getenv("OPENAI_API_KEY") == "" {
+				return errors.New("OPENAI_API_KEY is not set")
+			}
+		case strings.HasPrefix(model, "gemini"):
+			if os.Getenv("GEMINI_API_KEY") == "" {
+				return errors.New("GEMINI_API_KEY is not set")
+			}
+		default:
+			return errors.New("model is not supported")
 		}
 		if os.Getenv("TBLS_SCHEMA") == "" {
 			return errors.New("TBLS_SCHEMA is not set")
@@ -64,12 +80,22 @@ var rootCmd = &cobra.Command{
 	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx := context.Background()
-		o := openai.New(os.Getenv("OPENAI_API_KEY"), model)
+
+		var m Model
+		switch {
+		case strings.HasPrefix(model, "gpt"):
+			m = openai.New(os.Getenv("OPENAI_API_KEY"), model)
+		case strings.HasPrefix(model, "gemini"):
+			m = gemini.New(os.Getenv("GEMINI_API_KEY"), model)
+		}
+
 		q := strings.Join(args, " ")
+
 		s, err := datasource.AnalyzeJSONStringOrFile(os.Getenv("TBLS_SCHEMA"))
 		if err != nil {
 			return fmt.Errorf("failed to analyze schema: %w", err)
 		}
+
 		includes = lo.Uniq(append(includes, tables...))
 		if err := s.Filter(&schema.FilterOption{
 			Include:       includes,
@@ -81,15 +107,12 @@ var rootCmd = &cobra.Command{
 
 		var a string
 		if query {
-			a, err = o.AskQuery(ctx, q, s)
-			if err != nil {
-				return err
-			}
+			a, err = m.AskQuery(ctx, q, s)
 		} else {
-			a, err = o.Ask(ctx, q, s)
-			if err != nil {
-				return err
-			}
+			a, err = m.Ask(ctx, q, s)
+		}
+		if err != nil {
+			return err
 		}
 		cmd.Println(a)
 		return nil

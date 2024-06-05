@@ -1,4 +1,4 @@
-package openai
+package templates
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	defaultPromtTmpl = `Answer the questions in the Question assuming the following DDL.
+	DefaultPromtTmpl = `Answer the questions in the Question assuming the following DDL.
 {{ .DatabaseVersion }}
 
 ## DDL ( Data Definition Language )
@@ -20,7 +20,7 @@ const (
 ## Question
 {{ .Question }}
 `
-	defaultQueryPromptTmpl = `Answer the SQL query in the "Explanation of the query to be created" section, assuming the database was created with the following DDL.
+	DefaultQueryPromptTmpl = `Answer the SQL query in the "Explanation of the query to be created" section, assuming the database was created with the following DDL.
 {{ .DatabaseVersion }}
 
 ## DDL ( Data Definition Language )
@@ -34,7 +34,7 @@ const (
 `
 )
 
-func generateDDLRoughly(s *schema.Schema) string {
+func GenerateDDLRoughly(s *schema.Schema) string {
 	var ddl string
 	for _, t := range s.Tables {
 		if t.Type == "VIEW" {
@@ -76,4 +76,25 @@ func generateDDLRoughly(s *schema.Schema) string {
 		}
 	}
 	return ddl
+}
+
+func DatabaseVersion(s *schema.Schema) string {
+	var n string
+	switch s.Driver.Name {
+	case "mysql":
+		n = "MySQL"
+	case "sqlite":
+		n = "SQLite"
+	case "postgres":
+		n = "PostgreSQL"
+	default:
+		n = s.Driver.Name
+	}
+	if s.Driver.DatabaseVersion != "" {
+		n += " " + s.Driver.DatabaseVersion
+	}
+	if n == "" {
+		n = "unknown"
+	}
+	return fmt.Sprintf("Database is %s.", n)
 }

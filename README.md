@@ -1,6 +1,6 @@
 # tbls-ask
 
-`tbls-ask` is an external subcommand of tbls for asking OpenAI using the datasource.
+`tbls-ask` is an external subcommand of tbls for asking OpenAI/Gemini using the datasource.
 
 ## Usage
 
@@ -31,6 +31,17 @@ GROUP BY `Year`, `Month`, `User`
 ORDER BY `Year` DESC, `Month` DESC, `User` ASC
 ```
 
+## Ask Gemini
+
+Add an option `--model` for asking Gemini.
+
+```console
+$ tbls ask --dsn 'mysql://user:pass@localhost:3306/wordpress' --model gemini-pro which is blog comment table?
+```
+
 ## Requirement
 
+Either OpenAI or Gemini API key is required.
+
 - `OPENAI_API_KEY` ... API Key of OpenAI.
+- `GEMINI_API_KEY` ... API Key of Gemini.

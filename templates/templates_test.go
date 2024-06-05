@@ -1,4 +1,4 @@
-package openai
+package templates
 
 import (
 	"fmt"
@@ -70,7 +70,7 @@ func TestGenerateDDLRoughly(t *testing.T) {
 	}
 	for i, tt := range tests {
 		t.Run(fmt.Sprintf("%d", i), func(t *testing.T) {
-			got := generateDDLRoughly(tt.s)
+			got := GenerateDDLRoughly(tt.s)
 			if got != tt.want {
 				t.Errorf("got %v\nwant %v", got, tt.want)
 			}
