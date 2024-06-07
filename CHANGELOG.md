@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.1.0](https://github.com/k1LoW/tbls-ask/compare/v0.0.6...v0.1.0) - 2024-06-05
+### New Features 🎉
+- Enhance tbls-ask with Gemini  by @kromiii in https://github.com/k1LoW/tbls-ask/pull/17
+
 ## [v0.0.6](https://github.com/k1LoW/tbls-ask/compare/v0.0.5...v0.0.6) - 2024-06-03
 ### Other Changes
 - Bump golang.org/x/crypto from 0.14.0 to 0.17.0 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/11
