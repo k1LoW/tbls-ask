@@ -17,6 +17,10 @@ const (
 {{ .DDL }}
 {{ .QuoteEnd }}
 
+## ViewPoints (Sets of tables based on specific concerns)
+
+{{ .ViewPoints }}
+
 ## Question
 {{ .Question }}
 `
@@ -76,6 +80,41 @@ func GenerateDDLRoughly(s *schema.Schema) string {
 		}
 	}
 	return ddl
+}
+
+func GenerateViewPoints(s *schema.Schema) string {
+	var output strings.Builder
+	for _, v := range s.Viewpoints {
+		output.WriteString(fmt.Sprintf("Viewpoint: %s\n", v.Name))
+		if v.Desc != "" {
+			output.WriteString(fmt.Sprintf("- Description: %s\n", v.Desc))
+		}
+		if len(v.Labels) > 0 {
+			output.WriteString(fmt.Sprintf("- Labels: %s\n", strings.Join(v.Labels, ", ")))
+		}
+		if len(v.Tables) > 0 {
+			output.WriteString(fmt.Sprintf("- Tables: %s\n", strings.Join(v.Tables, ", ")))
+		}
+		if v.Distance > 0 {
+			output.WriteString(fmt.Sprintf("- Distance: %d\n", v.Distance))
+		}
+		for _, g := range v.Groups {
+			output.WriteString(fmt.Sprintf("- Group: %s\n", g.Name))
+			if g.Desc != "" {
+				output.WriteString(fmt.Sprintf("  - Description: %s\n", g.Desc))
+			}
+			if len(g.Labels) > 0 {
+				output.WriteString(fmt.Sprintf("  - Labels: %s\n", strings.Join(g.Labels, ", ")))
+			}
+			if len(g.Tables) > 0 {
+				output.WriteString(fmt.Sprintf("  - Tables: %s\n", strings.Join(g.Tables, ", ")))
+			}
+			if g.Color != "" {
+				output.WriteString(fmt.Sprintf("  - Color: %s\n", g.Color))
+			}
+		}
+	}
+	return output.String()
 }
 
 func DatabaseVersion(s *schema.Schema) string {

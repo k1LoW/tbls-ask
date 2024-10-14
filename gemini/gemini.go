@@ -59,6 +59,7 @@ func (g *Gemini) Ask(ctx context.Context, q string, s *schema.Schema) (string, e
 		"QuoteStart":      "```sql",
 		"QuoteEnd":        "```",
 		"DDL":             templates.GenerateDDLRoughly(s),
+		"Viewpoints":      templates.GenerateViewPoints(s),
 		"Question":        q,
 	}); err != nil {
 		return "", err
@@ -93,6 +94,7 @@ func (g *Gemini) AskQuery(ctx context.Context, q string, s *schema.Schema) (stri
 		"QuoteStart":      "```sql",
 		"QuoteEnd":        "```",
 		"DDL":             templates.GenerateDDLRoughly(s),
+		"Viewpoints":      templates.GenerateViewPoints(s),
 		"Question":        q,
 	}); err != nil {
 		return "", err

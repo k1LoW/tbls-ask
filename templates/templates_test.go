@@ -77,3 +77,52 @@ func TestGenerateDDLRoughly(t *testing.T) {
 		})
 	}
 }
+
+func TestGenerateViewPoints(t *testing.T) {
+	tests := []struct {
+		s    *schema.Schema
+		want string
+	}{
+		{
+			&schema.Schema{
+				Name: "test",
+				Tables: []*schema.Table{
+					{
+						Name: "test",
+						Columns: []*schema.Column{
+							{
+								Name: "id",
+								Type: "int",
+							},
+							{
+								Name: "name",
+								Type: "varchar",
+							},
+						},
+					},
+				},
+				Viewpoints: []*schema.Viewpoint{
+					{
+						Name:        "test",
+						Desc: "test viewpoint",
+						Tables: []string{
+							"test",
+						},
+					},
+				},
+			},
+			`Viewpoint: test
+- Description: test viewpoint
+- Tables: test
+`,
+	},
+	}
+	for i, tt := range tests {
+		t.Run(fmt.Sprintf("%d", i), func(t *testing.T) {
+			got := GenerateViewPoints(tt.s)
+			if got != tt.want {
+				t.Errorf("got %v\nwant %v", got, tt.want)
+			}
+		})
+	}
+}
