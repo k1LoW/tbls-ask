@@ -46,6 +46,7 @@ func (o *OpenAI) Ask(ctx context.Context, q string, s *schema.Schema) (string, e
 		"QuoteStart":      quoteStart,
 		"QuoteEnd":        quoteEnd,
 		"DDL":             templates.GenerateDDLRoughly(s),
+		"ViewPoints":      templates.GenerateViewPoints(s),
 		"Question":        q,
 	}); err != nil {
 		return "", err
@@ -78,6 +79,7 @@ func (o *OpenAI) AskQuery(ctx context.Context, q string, s *schema.Schema) (stri
 		"QuoteStart":      quoteStart,
 		"QuoteEnd":        quoteEnd,
 		"DDL":             templates.GenerateDDLRoughly(s),
+		"ViewPoints":      templates.GenerateViewPoints(s),
 		"Question":        q,
 	}); err != nil {
 		return "", err
