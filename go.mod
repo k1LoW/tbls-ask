@@ -4,6 +4,7 @@ go 1.22
 
 require (
 	github.com/google/generative-ai-go v0.13.0
+	github.com/google/go-cmp v0.6.0
 	github.com/k1LoW/repin v0.3.4
 	github.com/k1LoW/tbls v1.67.1
 	github.com/samber/lo v1.38.1
