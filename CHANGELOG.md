@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.2.0](https://github.com/k1LoW/tbls-ask/compare/v0.1.1...v0.2.0) - 2024-10-25
+### Other Changes
+- [Refactoring] Move existing code into packages by @kromiii in https://github.com/k1LoW/tbls-ask/pull/21
+
 ## [v0.1.1](https://github.com/k1LoW/tbls-ask/compare/v0.1.0...v0.1.1) - 2024-10-16
 ### Other Changes
 - Viewpoint を template に渡せるようにする by @kromiii in https://github.com/k1LoW/tbls-ask/pull/19
