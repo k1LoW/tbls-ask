@@ -1,6 +1,6 @@
 # tbls-ask
 
-`tbls-ask` is an external subcommand of tbls for asking OpenAI/Gemini using the datasource.
+`tbls-ask` is an external subcommand of tbls for asking LLM of the datasource.
 
 ## Usage
 

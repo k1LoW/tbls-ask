@@ -23,18 +23,17 @@ package cmd
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"io"
 	"log"
 	"os"
 	"strings"
 
-	"github.com/k1LoW/tbls-ask/gemini"
-	"github.com/k1LoW/tbls-ask/openai"
+	"github.com/k1LoW/tbls-ask/analyzer"
+	"github.com/k1LoW/tbls-ask/client"
+	"github.com/k1LoW/tbls-ask/internal/gemini"
+	"github.com/k1LoW/tbls-ask/internal/openai"
 	"github.com/k1LoW/tbls-ask/version"
-	"github.com/k1LoW/tbls/datasource"
-	"github.com/k1LoW/tbls/schema"
 	"github.com/samber/lo"
 	"github.com/spf13/cobra"
 )
@@ -48,73 +47,58 @@ var (
 	labels   []string
 )
 
-// Model interface for asking questions
-type Model interface {
-	Ask(ctx context.Context, q string, s *schema.Schema) (string, error)
-	AskQuery(ctx context.Context, q string, s *schema.Schema) (string, error)
-}
-
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:          "tbls-ask",
-	Short:        "ask OpenAI (or Gemini) using the datasource",
-	Long:         `ask OpenAI (or Gemini) using the datasource.`,
+	Short:        "ask database info to LLM using provided table document",
+	Long:         `ask database information to LLM using provided table document.`,
 	SilenceUsage: true,
-	PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
-		switch {
-		case strings.HasPrefix(model, "gpt"):
-			if os.Getenv("OPENAI_API_KEY") == "" {
-				return errors.New("OPENAI_API_KEY is not set")
-			}
-		case strings.HasPrefix(model, "gemini"):
-			if os.Getenv("GEMINI_API_KEY") == "" {
-				return errors.New("GEMINI_API_KEY is not set")
-			}
-		default:
-			return errors.New("model is not supported")
-		}
-		if os.Getenv("TBLS_SCHEMA") == "" {
-			return errors.New("TBLS_SCHEMA is not set")
-		}
-		return nil
-	},
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx := context.Background()
 
-		var m Model
-		switch {
-		case strings.HasPrefix(model, "gpt"):
-			m = openai.New(os.Getenv("OPENAI_API_KEY"), model)
-		case strings.HasPrefix(model, "gemini"):
-			m = gemini.New(os.Getenv("GEMINI_API_KEY"), model)
-		}
-
 		q := strings.Join(args, " ")
 
-		s, err := datasource.AnalyzeJSONStringOrFile(os.Getenv("TBLS_SCHEMA"))
-		if err != nil {
-			return fmt.Errorf("failed to analyze schema: %w", err)
+		includes = lo.Uniq(append(includes, tables...)) // tables and includes are eqivalent
+		s := os.Getenv("TBLS_SCHEMA") // this env var is to be set by tbls
+		if s == "" {
+			return fmt.Errorf("TBLS_SCHEMA is not set")
 		}
-
-		includes = lo.Uniq(append(includes, tables...))
-		if err := s.Filter(&schema.FilterOption{
-			Include:       includes,
-			Exclude:       excludes,
-			IncludeLabels: labels,
-		}); err != nil {
-			return fmt.Errorf("failed to filter schema: %w", err)
-		}
-
-		var a string
-		if query {
-			a, err = m.AskQuery(ctx, q, s)
-		} else {
-			a, err = m.Ask(ctx, q, s)
-		}
+		var a analyzer.Analyzer
+		err := a.AnalyzeSchema(s, includes, excludes, labels)
 		if err != nil {
 			return err
 		}
-		cmd.Println(a)
+
+		p, err := a.GeneratePrompt(q, query)
+		if err != nil {
+			return err
+		}
+
+		var agent client.LLMAgent
+		if strings.HasPrefix(model, "gpt") {
+			agent, err = openai.NewClient(model)
+			if err != nil {
+				return err
+			}
+		} else if strings.HasPrefix(model, "gemini") {
+			agent, err = gemini.NewClient(ctx, model)
+			if err != nil {
+				return err
+			}
+		} else {
+			return fmt.Errorf("unsupported model: %s", model)
+		}
+
+		c := client.Client{
+			Agent:     agent,
+			Querymode: query,
+		}
+
+		answer, err := c.Ask(ctx, p)
+		if err != nil {
+			return err
+		}
+		cmd.Println(answer)
 		return nil
 	},
 }
@@ -146,5 +130,5 @@ func init() {
 	rootCmd.Flags().StringSliceVarP(&excludes, "exclude", "", []string{}, "tables to exclude")
 	rootCmd.Flags().StringSliceVarP(&labels, "label", "", []string{}, "table labels to be included")
 	rootCmd.Flags().BoolVarP(&query, "query", "q", false, "ask OpenAI for query using the datasource")
-	rootCmd.Flags().StringVarP(&model, "model", "m", openai.DefaultModelChat, "model to be used")
+	rootCmd.Flags().StringVarP(&model, "model", "m", "gpt-4o", "model to be used")
 }
