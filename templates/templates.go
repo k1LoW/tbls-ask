@@ -44,6 +44,16 @@ const (
 ## Explanation of the query to be created
 {{ .Question }}
 `
+
+	RelevantTablesPromptTmpl = `You are an AI assistant specializing in database analysis. Given the following list of tables and their descriptions (if available):
+
+%s
+
+Please analyze the user's query:
+"%s"
+
+Identify and list only the table names that are most relevant to answering this query. Do not include any explanations or additional text. Only provide a comma-separated list of table names.
+`
 )
 
 func GenerateDDLRoughly(s *schema.Schema) string {

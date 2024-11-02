@@ -39,12 +39,14 @@ import (
 )
 
 var (
-	query    bool
-	model    string
-	tables   []string
-	includes []string
-	excludes []string
-	labels   []string
+	query      bool
+	autoFilter bool
+	model      string
+	tables     []string
+	includes   []string
+	excludes   []string
+	labels     []string
+	distance   int
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -55,21 +57,15 @@ var rootCmd = &cobra.Command{
 	SilenceUsage: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx := context.Background()
-
 		q := strings.Join(args, " ")
-
-		includes = lo.Uniq(append(includes, tables...)) // tables and includes are eqivalent
-		s := os.Getenv("TBLS_SCHEMA") // this env var is to be set by tbls
+				
+		s := os.Getenv("TBLS_SCHEMA")                   // this env var is to be set by tbls
 		if s == "" {
 			return fmt.Errorf("TBLS_SCHEMA is not set")
 		}
-		var a analyzer.Analyzer
-		err := a.AnalyzeSchema(s, includes, excludes, labels)
-		if err != nil {
-			return err
-		}
 
-		p, err := a.GeneratePrompt(q, query)
+		var a analyzer.Analyzer
+		err := a.AnalyzeSchema(s)
 		if err != nil {
 			return err
 		}
@@ -92,6 +88,22 @@ var rootCmd = &cobra.Command{
 		c := client.Client{
 			Agent:     agent,
 			Querymode: query,
+		}
+
+		if autoFilter {
+			includes, err = a.ExtractRelevantTables(ctx, &c, q)
+			if err != nil {
+				return err
+			}
+		} else {
+			includes = lo.Uniq(append(includes, tables...)) // tables and includes are eqivalent
+		}
+
+		a.FilterSchema(includes, excludes, labels, distance)
+
+		p, err := a.GeneratePrompt(q, query)
+		if err != nil {
+			return err
 		}
 
 		answer, err := c.Ask(ctx, p)
@@ -131,4 +143,6 @@ func init() {
 	rootCmd.Flags().StringSliceVarP(&labels, "label", "", []string{}, "table labels to be included")
 	rootCmd.Flags().BoolVarP(&query, "query", "q", false, "ask OpenAI for query using the datasource")
 	rootCmd.Flags().StringVarP(&model, "model", "m", "gpt-4o", "model to be used")
+	rootCmd.Flags().BoolVarP(&autoFilter, "auto-filter", "f", false, "automatically filter tables to include only relevant information")
+	rootCmd.Flags().IntVarP(&distance, "distance", "d", 3, "max distance between tables")
 }

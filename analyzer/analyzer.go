@@ -2,10 +2,12 @@ package analyzer
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"strings"
 	"text/template"
 
+	"github.com/k1LoW/tbls-ask/client"
 	"github.com/k1LoW/tbls-ask/templates"
 	"github.com/k1LoW/tbls/config"
 	"github.com/k1LoW/tbls/datasource"
@@ -16,7 +18,7 @@ type Analyzer struct {
 	Schema *schema.Schema
 }
 
-func (a *Analyzer) AnalyzeSchema(strOrPath string, includes []string, excludes []string, labels []string) error {
+func (a *Analyzer) AnalyzeSchema(strOrPath string) error {
 	var s *schema.Schema
 	var err error
 
@@ -30,16 +32,20 @@ func (a *Analyzer) AnalyzeSchema(strOrPath string, includes []string, excludes [
 		return fmt.Errorf("failed to analyze schema: %w", err)
 	}
 
-	if err := s.Filter(&schema.FilterOption{
+	a.Schema = s
+
+	return nil
+}
+
+func (a *Analyzer) FilterSchema(includes []string, excludes []string, labels []string, distance int) error {
+	if err := a.Schema.Filter(&schema.FilterOption{
 		Include:       includes,
 		Exclude:       excludes,
 		IncludeLabels: labels,
+		Distance:      distance,
 	}); err != nil {
 		return fmt.Errorf("failed to filter schema: %w", err)
 	}
-
-	a.Schema = s
-
 	return nil
 }
 
@@ -66,4 +72,46 @@ func (a *Analyzer) GeneratePrompt(q string, querymode bool) (string, error) {
 		return "", err
 	}
 	return buf.String(), nil
+}
+
+func (a *Analyzer) ExtractRelevantTables(ctx context.Context, c *client.Client, query string) ([]string, error) {
+	var info string
+	tableNames := make([]string, 0, len(a.Schema.Tables))
+	for _, t := range a.Schema.Tables {
+		if t.Type == "VIEW" || t.Type == "MATERIALIZED VIEW" {
+			continue
+		}
+		tableNames = append(tableNames, t.Name)
+		if t.Comment != "" {
+			info += fmt.Sprintf("%s: %s\n", t.Name, t.Comment)
+		} else {
+			info += fmt.Sprintf("%s\n", t.Name)
+		}
+	}
+
+	prompt := fmt.Sprintf(templates.RelevantTablesPromptTmpl, info, query)
+	resp, err := c.Agent.ChatCompletionRequest(ctx, prompt)
+	if err != nil {
+		return nil, err
+	}
+	if resp == "" {
+		return nil, fmt.Errorf("failed to extract relevant tables: empty response")
+	}
+
+	relevantTables := strings.Split(resp, ",")
+	for i, t := range relevantTables {
+		relevantTables[i] = strings.TrimSpace(t)
+		found := false
+		for _, tableName := range tableNames {
+			if tableName == relevantTables[i] {
+				found = true
+				break
+			}
+		}
+		if !found {
+			return nil, fmt.Errorf("failed to extract relevant tables: %s not found", relevantTables[i])
+		}
+	}
+
+	return relevantTables, nil
 }
