@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	tblsschema "github.com/k1LoW/tbls/schema"
+	"github.com/k1LoW/tbls/schema"
 )
 
 func TestLoad(t *testing.T) {
@@ -13,20 +13,20 @@ func TestLoad(t *testing.T) {
 		name      string
 		strOrPath string
 		opts      Options
-		want      *tblsschema.Schema
+		want      *schema.Schema
 		wantErr   bool
 	}{
 		{
 			name:      "load JSON string",
 			strOrPath: `{"name": "test", "tables": [{"name": "a", "comment": "table a", "columns": [{"name": "id", "type": "int"}]},{"name": "b", "comment": "table b", "columns": [{"name": "title", "type": "varchar"}]}]}`,
 			opts:      Options{},
-			want: &tblsschema.Schema{
+			want: &schema.Schema{
 				Name: "test",
-				Tables: []*tblsschema.Table{
+				Tables: []*schema.Table{
 					{
 						Name:    "a",
 						Comment: "table a",
-						Columns: []*tblsschema.Column{
+						Columns: []*schema.Column{
 							{
 								Name: "id",
 								Type: "int",
@@ -36,7 +36,7 @@ func TestLoad(t *testing.T) {
 					{
 						Name:    "b",
 						Comment: "table b",
-						Columns: []*tblsschema.Column{
+						Columns: []*schema.Column{
 							{
 								Name: "title",
 								Type: "varchar",
@@ -53,18 +53,18 @@ func TestLoad(t *testing.T) {
 			opts: Options{
 				Includes: []string{"a"},
 			},
-			want: &tblsschema.Schema{
+			want: &schema.Schema{
 				Name: "test",
-				Tables: []*tblsschema.Table{
+				Tables: []*schema.Table{
 					{
 						Name:    "a",
 						Comment: "table a",
-						Columns: []*tblsschema.Column{
+						Columns: []*schema.Column{
 							{
 								Name:            "id",
 								Type:            "int",
-								ParentRelations: []*tblsschema.Relation{},
-								ChildRelations:  []*tblsschema.Relation{},
+								ParentRelations: []*schema.Relation{},
+								ChildRelations:  []*schema.Relation{},
 								// Add other fields with their default values
 								Nullable:  false,
 								PK:        false,
@@ -76,7 +76,7 @@ func TestLoad(t *testing.T) {
 						},
 					},
 				},
-				Relations: []*tblsschema.Relation{},
+				Relations: []*schema.Relation{},
 			},
 			wantErr: false,
 		},
@@ -86,18 +86,18 @@ func TestLoad(t *testing.T) {
 			opts: Options{
 				Excludes: []string{"b"},
 			},
-			want: &tblsschema.Schema{
+			want: &schema.Schema{
 				Name: "test",
-				Tables: []*tblsschema.Table{
+				Tables: []*schema.Table{
 					{
 						Name:    "a",
 						Comment: "table a",
-						Columns: []*tblsschema.Column{
+						Columns: []*schema.Column{
 							{
 								Name:            "id",
 								Type:            "int",
-								ParentRelations: []*tblsschema.Relation{},
-								ChildRelations:  []*tblsschema.Relation{},
+								ParentRelations: []*schema.Relation{},
+								ChildRelations:  []*schema.Relation{},
 								// Add other fields with their default values
 								Nullable:  false,
 								PK:        false,
@@ -109,7 +109,7 @@ func TestLoad(t *testing.T) {
 						},
 					},
 				},
-				Relations: []*tblsschema.Relation{},
+				Relations: []*schema.Relation{},
 			},
 			wantErr: false,
 		},

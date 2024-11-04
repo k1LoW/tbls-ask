@@ -6,7 +6,7 @@ import (
 
 	"github.com/k1LoW/tbls/config"
 	"github.com/k1LoW/tbls/datasource"
-	tblsschema "github.com/k1LoW/tbls/schema"
+	"github.com/k1LoW/tbls/schema"
 )
 
 type Options struct {
@@ -16,8 +16,8 @@ type Options struct {
 	Distance   int
 }
 
-func Load(strOrPath string, opts Options) (*tblsschema.Schema, error) {
-	var s *tblsschema.Schema
+func Load(strOrPath string, opts Options) (*schema.Schema, error) {
+	var s *schema.Schema
 	var err error
 
 	if strings.HasPrefix(strOrPath, "{") || strings.HasPrefix(strOrPath, "/") {
@@ -30,7 +30,7 @@ func Load(strOrPath string, opts Options) (*tblsschema.Schema, error) {
 		return nil, fmt.Errorf("failed to analyze schema: %w", err)
 	}
 
-	if err := s.Filter(&tblsschema.FilterOption{
+	if err := s.Filter(&schema.FilterOption{
 		Include:       opts.Includes,
 		Exclude:       opts.Excludes,
 		IncludeLabels: opts.Labels,
