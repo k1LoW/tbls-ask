@@ -2,10 +2,19 @@ package chat
 
 import (
 	"context"
+	"os"
 	"testing"
 )
 
 func TestNewService(t *testing.T) {
+	os.Setenv("OPENAI_API_KEY", "test-openai-key")
+	os.Setenv("GEMINI_API_KEY", "test-gemini-key")
+
+	defer func() {
+		os.Unsetenv("OPENAI_API_KEY")
+		os.Unsetenv("GEMINI_API_KEY")
+	}()
+
 	tests := []struct {
 		name    string
 		model   string
