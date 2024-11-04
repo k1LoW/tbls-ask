@@ -14,7 +14,7 @@ type GeminiClient struct {
 	model  *genai.GenerativeModel
 }
 
-func NewGeminiClient() (*GeminiClient, error) {
+func NewGeminiClient(model string) (*GeminiClient, error) {
 	key := os.Getenv("GEMINI_API_KEY")
 	if key == "" {
 		return nil, fmt.Errorf("GEMINI_API_KEY is not set")
@@ -28,7 +28,7 @@ func NewGeminiClient() (*GeminiClient, error) {
 
 	return &GeminiClient{
 		client: client,
-		model:  client.GenerativeModel("gemini-pro"),
+		model:  client.GenerativeModel(model),
 	}, nil
 }
 
@@ -38,13 +38,21 @@ func (c *GeminiClient) Ask(ctx context.Context, messages []Message) (string, err
 	// Convert messages to Gemini format
 	history := make([]*genai.Content, len(messages))
 	for i, msg := range messages {
+		role := msg.Role
+		if role == "system" {
+			role = "user"
+		} else if role == "assistant" {
+			role = "model"
+		}
+
 		history[i] = &genai.Content{
 			Parts: []genai.Part{
 				genai.Text(msg.Content),
 			},
-			Role: msg.Role,
+			Role: role,
 		}
 	}
+
 	chat.History = history
 
 	// Send the last message

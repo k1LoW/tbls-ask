@@ -98,7 +98,7 @@ var rootCmd = &cobra.Command{
 			},
 		}
 
-		response, err := service.Ask(ctx, messages, true)
+		response, err := service.Ask(ctx, messages, queryMode)
 		if err != nil {
 			return err
 		}

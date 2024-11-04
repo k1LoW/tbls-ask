@@ -17,7 +17,7 @@ func NewService(model string) (*Service, error) {
 	if strings.HasPrefix(model, "gpt") {
 		client, err = NewOpenAIClient(model)
 	} else if strings.HasPrefix(model, "gemini") {
-		client, err = NewGeminiClient()
+		client, err = NewGeminiClient(model)
 	} else {
 		return nil, fmt.Errorf("unsupported model: %s", model)
 	}
