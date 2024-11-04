@@ -23,26 +23,6 @@ const (
 {{ .ViewPoints }}
 
 {{ end }}
-## Question
-{{ .Question }}
-`
-	DefaultQueryPromptTmpl = `Answer the SQL query in the "Explanation of the query to be created" section, assuming the database was created with the following DDL.
-{{ .DatabaseVersion }}
-
-## DDL ( Data Definition Language )
-
-{{ .QuoteStart }}
-{{ .DDL }}
-{{ .QuoteEnd }}
-{{ if .ViewPoints }}
-
-## ViewPoints (Sets of tables based on specific concerns)
-
-{{ .ViewPoints }}
-
-{{ end }}
-## Explanation of the query to be created
-{{ .Question }}
 `
 )
 

@@ -29,22 +29,22 @@ import (
 	"os"
 	"strings"
 
-	"github.com/k1LoW/tbls-ask/analyzer"
-	"github.com/k1LoW/tbls-ask/client"
-	"github.com/k1LoW/tbls-ask/internal/gemini"
-	"github.com/k1LoW/tbls-ask/internal/openai"
+	"github.com/k1LoW/tbls-ask/chat"
+	"github.com/k1LoW/tbls-ask/prompt"
+	"github.com/k1LoW/tbls-ask/schema"
 	"github.com/k1LoW/tbls-ask/version"
 	"github.com/samber/lo"
 	"github.com/spf13/cobra"
 )
 
 var (
-	query    bool
-	model    string
-	tables   []string
-	includes []string
-	excludes []string
-	labels   []string
+	queryMode bool
+	model     string
+	tables    []string
+	includes  []string
+	excludes  []string
+	labels    []string
+	distance  int
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -55,50 +55,54 @@ var rootCmd = &cobra.Command{
 	SilenceUsage: true,
 	RunE: func(cmd *cobra.Command, args []string) error {
 		ctx := context.Background()
-
 		q := strings.Join(args, " ")
-
-		includes = lo.Uniq(append(includes, tables...)) // tables and includes are eqivalent
 		s := os.Getenv("TBLS_SCHEMA") // this env var is to be set by tbls
 		if s == "" {
 			return fmt.Errorf("TBLS_SCHEMA is not set")
 		}
-		var a analyzer.Analyzer
-		err := a.AnalyzeSchema(s, includes, excludes, labels)
+
+		opts := schema.Options{
+			Includes: lo.Uniq(append(includes, tables...)),
+			Excludes: excludes,
+			Labels:   labels,
+			Distance: distance,
+		}
+
+		schema, err := schema.Load(s, opts)
 		if err != nil {
 			return err
 		}
 
-		p, err := a.GeneratePrompt(q, query)
+		prompt, err := prompt.Generate(schema)
 		if err != nil {
 			return err
 		}
 
-		var agent client.LLMAgent
-		if strings.HasPrefix(model, "gpt") {
-			agent, err = openai.NewClient(model)
-			if err != nil {
-				return err
-			}
-		} else if strings.HasPrefix(model, "gemini") {
-			agent, err = gemini.NewClient(ctx, model)
-			if err != nil {
-				return err
-			}
-		} else {
-			return fmt.Errorf("unsupported model: %s", model)
-		}
-
-		c := client.Client{
-			Agent:     agent,
-			Querymode: query,
-		}
-
-		answer, err := c.Ask(ctx, p)
+		service, err := chat.NewService(model)
 		if err != nil {
 			return err
 		}
-		cmd.Println(answer)
+
+		messages := []chat.Message{
+			{
+				Role:    "system",
+				Content: "You are a database expert. You are given a database schema and a question. Answer the question based on the schema.",
+			},
+			{
+				Role:    "user",
+				Content: prompt,
+			},
+			{
+				Role:    "user",
+				Content: q,
+			},
+		}
+
+		response, err := service.Ask(ctx, messages, true)
+		if err != nil {
+			return err
+		}
+		cmd.Println(response)
 		return nil
 	},
 }
@@ -129,6 +133,7 @@ func init() {
 	rootCmd.Flags().StringSliceVarP(&includes, "include", "", []string{}, "tables to include")
 	rootCmd.Flags().StringSliceVarP(&excludes, "exclude", "", []string{}, "tables to exclude")
 	rootCmd.Flags().StringSliceVarP(&labels, "label", "", []string{}, "table labels to be included")
-	rootCmd.Flags().BoolVarP(&query, "query", "q", false, "ask OpenAI for query using the datasource")
+	rootCmd.Flags().BoolVarP(&queryMode, "query", "q", false, "ask OpenAI for query using the datasource")
 	rootCmd.Flags().StringVarP(&model, "model", "m", "gpt-4o", "model to be used")
+	rootCmd.Flags().IntVarP(&distance, "distance", "d", 1, "distance between tables to be included")
 }
