@@ -73,7 +73,7 @@ var rootCmd = &cobra.Command{
 			return err
 		}
 
-		prompt, err := prompt.Generate(schema)
+		schemaPrompt, err := prompt.Generate(schema)
 		if err != nil {
 			return err
 		}
@@ -90,7 +90,7 @@ var rootCmd = &cobra.Command{
 			},
 			{
 				Role:    "user",
-				Content: prompt,
+				Content: schemaPrompt,
 			},
 			{
 				Role:    "user",
