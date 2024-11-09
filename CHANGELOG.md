@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.3.0](https://github.com/k1LoW/tbls-ask/compare/v0.2.0...v0.3.0) - 2024-11-09
+### New Features 🎉
+- [Refactor] remove analyzer package by @kromiii in https://github.com/k1LoW/tbls-ask/pull/24
+### Other Changes
+- We no longer use client package (moved to chat package) by @kromiii in https://github.com/k1LoW/tbls-ask/pull/26
+
 ## [v0.2.0](https://github.com/k1LoW/tbls-ask/compare/v0.1.1...v0.2.0) - 2024-10-25
 ### Other Changes
 - [Refactoring] Move existing code into packages by @kromiii in https://github.com/k1LoW/tbls-ask/pull/21
