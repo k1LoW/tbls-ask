@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.3.1](https://github.com/k1LoW/tbls-ask/compare/v0.3.0...v0.3.1) - 2024-11-17
+### Other Changes
+- Update tbls to v1.79.3 with go oldstable version by @kromiii in https://github.com/k1LoW/tbls-ask/pull/28
+
 ## [v0.3.0](https://github.com/k1LoW/tbls-ask/compare/v0.2.0...v0.3.0) - 2024-11-09
 ### New Features 🎉
 - [Refactor] remove analyzer package by @kromiii in https://github.com/k1LoW/tbls-ask/pull/24
