@@ -19,6 +19,9 @@ jobs:
         with:
           go-version-file: go.mod
 
+      - name: Check if version of go directive in go.mod is oldstable
+        uses: k1LoW/oldstable@v1
+
       - name: Run lint
         uses: reviewdog/action-golangci-lint@v2
         with:
