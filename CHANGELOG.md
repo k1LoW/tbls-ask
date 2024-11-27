@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.3.2](https://github.com/k1LoW/tbls-ask/compare/v0.3.1...v0.3.2) - 2024-11-27
+### Other Changes
+- Bump github.com/cli/go-gh/v2 from 2.6.0 to 2.11.1 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/30
+
 ## [v0.3.1](https://github.com/k1LoW/tbls-ask/compare/v0.3.0...v0.3.1) - 2024-11-17
 ### Other Changes
 - Update tbls to v1.79.3 with go oldstable version by @kromiii in https://github.com/k1LoW/tbls-ask/pull/28
