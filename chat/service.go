@@ -14,7 +14,7 @@ func NewService(model string) (*Service, error) {
 	var client Client
 	var err error
 
-	if strings.HasPrefix(model, "gpt") {
+	if strings.HasPrefix(model, "gpt") || strings.HasPrefix(model, "o") {
 		client, err = NewOpenAIClient(model)
 	} else if strings.HasPrefix(model, "gemini") {
 		client, err = NewGeminiClient(model)
