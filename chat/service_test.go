@@ -21,6 +21,7 @@ func TestNewService(t *testing.T) {
 		wantErr bool
 	}{
 		{"GPT model", "gpt-3.5-turbo", false},
+		{"GPT model with o", "o1-mini", false},
 		{"Gemini model", "gemini-pro", false},
 		{"Unsupported model", "unsupported-model", true},
 	}
