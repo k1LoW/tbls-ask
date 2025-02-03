@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.4.1](https://github.com/k1LoW/tbls-ask/compare/v0.4.0...v0.4.1) - 2025-02-03
+### Other Changes
+- Bump tbls to v1.81.0 by @kromiii in https://github.com/k1LoW/tbls-ask/pull/35
+- support o1 (o3) models by @kromiii in https://github.com/k1LoW/tbls-ask/pull/37
+
 ## [v0.4.0](https://github.com/k1LoW/tbls-ask/compare/v0.3.1...v0.4.0) - 2025-02-03
 ### New Features 🎉
 - Supports Azure API by @pyama86 in https://github.com/k1LoW/tbls-ask/pull/33
