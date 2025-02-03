@@ -1,5 +1,13 @@
 # Changelog
 
+## [v0.4.0](https://github.com/k1LoW/tbls-ask/compare/v0.3.1...v0.4.0) - 2025-02-03
+### New Features 🎉
+- Supports Azure API by @pyama86 in https://github.com/k1LoW/tbls-ask/pull/33
+### Other Changes
+- Bump github.com/cli/go-gh/v2 from 2.6.0 to 2.11.1 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/30
+- Bump golang.org/x/crypto from 0.28.0 to 0.31.0 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/32
+- Bump golang.org/x/net from 0.30.0 to 0.33.0 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/34
+
 ## [v0.3.1](https://github.com/k1LoW/tbls-ask/compare/v0.3.0...v0.3.1) - 2024-11-17
 ### Other Changes
 - Update tbls to v1.79.3 with go oldstable version by @kromiii in https://github.com/k1LoW/tbls-ask/pull/28
