@@ -61,7 +61,6 @@ func (c *OpenAIClient) Ask(ctx context.Context, messages []Message) (string, err
 
 	resp, err := c.client.CreateChatCompletion(ctx, openai.ChatCompletionRequest{
 		Model:       c.model,
-		Temperature: 0.5,
 		Messages:    openaiMessages,
 	})
 	if err != nil {
