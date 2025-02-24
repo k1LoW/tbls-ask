@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.4.2](https://github.com/k1LoW/tbls-ask/compare/v0.4.1...v0.4.2) - 2025-02-24
+### Other Changes
+- Remove temperature setting from OpenAI client and change system role to user by @kromiii in https://github.com/k1LoW/tbls-ask/pull/38
+
 ## [v0.4.1](https://github.com/k1LoW/tbls-ask/compare/v0.4.0...v0.4.1) - 2025-02-03
 ### Other Changes
 - Bump tbls to v1.81.0 by @kromiii in https://github.com/k1LoW/tbls-ask/pull/35
