@@ -85,7 +85,7 @@ var rootCmd = &cobra.Command{
 
 		messages := []chat.Message{
 			{
-				Role:    "system",
+				Role:    "user",
 				Content: "You are a database expert. You are given a database schema and a question. Answer the question based on the schema.",
 			},
 			{
