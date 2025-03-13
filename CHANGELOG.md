@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.5.0](https://github.com/k1LoW/tbls-ask/compare/v0.4.2...v0.5.0) - 2025-03-13
+### Other Changes
+- Bump golang.org/x/net from 0.33.0 to 0.36.0 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/40
+- fix typo by @7kaji in https://github.com/k1LoW/tbls-ask/pull/42
+
 ## [v0.4.2](https://github.com/k1LoW/tbls-ask/compare/v0.4.1...v0.4.2) - 2025-02-24
 ### Other Changes
 - Remove temperature setting from OpenAI client and change system role to user by @kromiii in https://github.com/k1LoW/tbls-ask/pull/38
