@@ -42,7 +42,7 @@ $ tbls ask --dsn 'mysql://user:pass@localhost:3306/wordpress' --model gemini-pro
 ## Ask Azure OpenAI
 ```console
 export AZURE_OPENAI_API_KEY=your_api_key
-export AZIRE_OPENAI_ENDPOINT=your_endpoint
+export AZURE_OPENAI_ENDPOINT=your_endpoint
 export AZURE_OPENAI_MODEL=your_model
 export AZURE_OPENAI_API_VERSION=your_api_version
 $ tbls ask --dsn 'mysql://user:pass@localhost:3306/wordpress' --model azure-openai which is blog comment table?
