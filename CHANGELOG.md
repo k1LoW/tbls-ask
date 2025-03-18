@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.6.0](https://github.com/k1LoW/tbls-ask/compare/v0.5.0...v0.6.0) - 2025-03-18
+### Other Changes
+- Bump github.com/expr-lang/expr from 1.16.9 to 1.17.0 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/43
+
 ## [v0.5.0](https://github.com/k1LoW/tbls-ask/compare/v0.4.2...v0.5.0) - 2025-03-13
 ### Other Changes
 - Bump golang.org/x/net from 0.33.0 to 0.36.0 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/40
