@@ -34,14 +34,15 @@ func NewGeminiClient(model string) (*GeminiClient, error) {
 
 func (c *GeminiClient) Ask(ctx context.Context, messages []Message) (string, error) {
 	chat := c.model.StartChat()
-	
+
 	// Convert messages to Gemini format
 	history := make([]*genai.Content, len(messages))
 	for i, msg := range messages {
 		role := msg.Role
-		if role == "system" {
+		switch role {
+		case "system":
 			role = "user"
-		} else if role == "assistant" {
+		case "assistant":
 			role = "model"
 		}
 
