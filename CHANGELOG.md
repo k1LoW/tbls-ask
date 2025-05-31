@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.6.2](https://github.com/k1LoW/tbls-ask/compare/v0.6.1...v0.6.2) - 2025-05-31
+### Other Changes
+- Bump github.com/cli/go-gh/v2 from 2.11.1 to 2.12.1 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/51
+- Bump golang.org/x/net from 0.36.0 to 0.38.0 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/49
+- Bump github.com/snowflakedb/gosnowflake from 1.12.1 to 1.13.3 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/50
+
 ## [v0.6.1](https://github.com/k1LoW/tbls-ask/compare/v0.6.0...v0.6.1) - 2025-03-22
 ### Other Changes
 - Bump github.com/golang-jwt/jwt/v5 from 5.2.1 to 5.2.2 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/45
