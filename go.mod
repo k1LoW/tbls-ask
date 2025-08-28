@@ -1,6 +1,6 @@
 module github.com/k1LoW/tbls-ask
 
-go 1.23.6
+go 1.24
 
 require (
 	github.com/google/generative-ai-go v0.13.0
