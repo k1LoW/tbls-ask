@@ -8,7 +8,7 @@ require (
 	github.com/k1LoW/repin v0.3.4
 	github.com/k1LoW/tbls v1.81.0
 	github.com/samber/lo v1.47.0
-	github.com/sashabaranov/go-openai v1.36.1
+	github.com/sashabaranov/go-openai v1.41.1
 	github.com/spf13/cobra v1.8.1
 	google.golang.org/api v0.214.0
 )
