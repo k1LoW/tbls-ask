@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.6.3](https://github.com/k1LoW/tbls-ask/compare/v0.6.2...v0.6.3) - 2025-08-28
+### Other Changes
+- update openai client by @pyama86 in https://github.com/k1LoW/tbls-ask/pull/53
+
 ## [v0.6.2](https://github.com/k1LoW/tbls-ask/compare/v0.6.1...v0.6.2) - 2025-05-31
 ### Other Changes
 - Bump github.com/cli/go-gh/v2 from 2.11.1 to 2.12.1 by @dependabot in https://github.com/k1LoW/tbls-ask/pull/51
