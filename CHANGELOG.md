@@ -1,5 +1,9 @@
 # Changelog
 
+## [v0.6.4](https://github.com/k1LoW/tbls-ask/compare/v0.6.3...v0.6.4) - 2025-10-09
+### Other Changes
+- chore: update tbls and pkgs version by @k1LoW in https://github.com/k1LoW/tbls-ask/pull/56
+
 ## [v0.6.3](https://github.com/k1LoW/tbls-ask/compare/v0.6.2...v0.6.3) - 2025-08-28
 ### Other Changes
 - update openai client by @pyama86 in https://github.com/k1LoW/tbls-ask/pull/53
