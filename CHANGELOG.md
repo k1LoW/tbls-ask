@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.6.5](https://github.com/k1LoW/tbls-ask/compare/v0.6.4...v0.6.5) - 2025-10-23
+### Other Changes
+- chore: setup tagpr labels by @k1LoW in https://github.com/k1LoW/tbls-ask/pull/58
+- Revert "chore: setup tagpr labels" by @k1LoW in https://github.com/k1LoW/tbls-ask/pull/60
+- chore: setup tagpr labels by @k1LoW in https://github.com/k1LoW/tbls-ask/pull/61
+
 ## [v0.6.4](https://github.com/k1LoW/tbls-ask/compare/v0.6.3...v0.6.4) - 2025-10-09
 ### Other Changes
 - chore: update tbls and pkgs version by @k1LoW in https://github.com/k1LoW/tbls-ask/pull/56
