@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.6.5](https://github.com/k1LoW/tbls-ask/compare/v0.6.4...v0.6.5) - 2025-11-20
+### Other Changes
+- chore: setup tagpr labels by @k1LoW in https://github.com/k1LoW/tbls-ask/pull/58
+- Revert "chore: setup tagpr labels" by @k1LoW in https://github.com/k1LoW/tbls-ask/pull/60
+- chore: setup tagpr labels by @k1LoW in https://github.com/k1LoW/tbls-ask/pull/61
+- chore(deps): bump golang.org/x/crypto from 0.42.0 to 0.45.0 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/62
+
 ## [v0.6.4](https://github.com/k1LoW/tbls-ask/compare/v0.6.3...v0.6.4) - 2025-10-09
 ### Other Changes
 - chore: update tbls and pkgs version by @k1LoW in https://github.com/k1LoW/tbls-ask/pull/56
