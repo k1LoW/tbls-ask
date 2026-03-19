@@ -1,5 +1,10 @@
 # Changelog
 
+## [v0.6.7](https://github.com/k1LoW/tbls-ask/compare/v0.6.6...v0.6.7) - 2026-03-19
+### Other Changes
+- chore(deps): bump go.opentelemetry.io/otel/sdk from 1.37.0 to 1.40.0 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/65
+- chore(deps): bump google.golang.org/grpc from 1.75.1 to 1.79.3 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/67
+
 ## [v0.6.6](https://github.com/k1LoW/tbls-ask/compare/v0.6.5...v0.6.6) - 2025-12-17
 ### Other Changes
 - chore(deps): bump github.com/expr-lang/expr from 1.17.6 to 1.17.7 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/63
