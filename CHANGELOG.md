@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.6.8](https://github.com/k1LoW/tbls-ask/compare/v0.6.7...v0.6.8) - 2026-04-08
+### Other Changes
+- chore(deps): bump github.com/aws/aws-sdk-go-v2/service/s3 from 1.71.1 to 1.97.3 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/69
+- chore(deps): bump go.opentelemetry.io/otel/sdk from 1.40.0 to 1.43.0 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/72
+- chore(deps): bump github.com/go-jose/go-jose/v4 from 4.1.3 to 4.1.4 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/68
+
 ## [v0.6.7](https://github.com/k1LoW/tbls-ask/compare/v0.6.6...v0.6.7) - 2026-03-19
 ### Other Changes
 - chore(deps): bump go.opentelemetry.io/otel/sdk from 1.37.0 to 1.40.0 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/65
