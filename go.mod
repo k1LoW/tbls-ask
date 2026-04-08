@@ -42,7 +42,7 @@ require (
 	github.com/apache/thrift v0.22.0 // indirect
 	github.com/aquasecurity/go-version v0.0.1 // indirect
 	github.com/aws/aws-sdk-go-v2 v1.39.2 // indirect
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.7 // indirect
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.8 // indirect
 	github.com/aws/aws-sdk-go-v2/config v1.31.12 // indirect
 	github.com/aws/aws-sdk-go-v2/credentials v1.18.16 // indirect
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.18.9 // indirect
@@ -61,7 +61,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sso v1.29.6 // indirect
 	github.com/aws/aws-sdk-go-v2/service/ssooidc v1.35.1 // indirect
 	github.com/aws/aws-sdk-go-v2/service/sts v1.38.6 // indirect
-	github.com/aws/smithy-go v1.23.0 // indirect
+	github.com/aws/smithy-go v1.24.2 // indirect
 	github.com/bradleyfalzon/ghinstallation/v2 v2.16.0 // indirect
 	github.com/buildkite/interpolate v0.1.5 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
