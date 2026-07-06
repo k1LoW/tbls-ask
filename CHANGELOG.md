@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.6.9](https://github.com/k1LoW/tbls-ask/compare/v0.6.8...v0.6.9) - 2026-07-04
+
+### Other Changes
+- chore(deps): bump github.com/apache/thrift from 0.22.0 to 0.23.0 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/73
+- chore(deps): bump go.mongodb.org/mongo-driver from 1.17.4 to 1.17.7 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/75
+- chore(deps): bump golang.org/x/net from 0.48.0 to 0.55.0 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/76
+
 ## [v0.6.8](https://github.com/k1LoW/tbls-ask/compare/v0.6.7...v0.6.8) - 2026-04-08
 ### Other Changes
 - chore(deps): bump github.com/aws/aws-sdk-go-v2/service/s3 from 1.71.1 to 1.97.3 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/69
