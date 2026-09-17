@@ -73,32 +73,32 @@ func GenerateDDLRoughly(s *schema.Schema) string {
 func GenerateViewPoints(s *schema.Schema) string {
 	var output strings.Builder
 	for _, v := range s.Viewpoints {
-		output.WriteString(fmt.Sprintf("Viewpoint: %s\n", v.Name))
+		fmt.Fprintf(&output, "Viewpoint: %s\n", v.Name)
 		if v.Desc != "" {
-			output.WriteString(fmt.Sprintf("- Description: %s\n", v.Desc))
+			fmt.Fprintf(&output, "- Description: %s\n", v.Desc)
 		}
 		if len(v.Labels) > 0 {
-			output.WriteString(fmt.Sprintf("- Labels: %s\n", strings.Join(v.Labels, ", ")))
+			fmt.Fprintf(&output, "- Labels: %s\n", strings.Join(v.Labels, ", "))
 		}
 		if len(v.Tables) > 0 {
-			output.WriteString(fmt.Sprintf("- Tables: %s\n", strings.Join(v.Tables, ", ")))
+			fmt.Fprintf(&output, "- Tables: %s\n", strings.Join(v.Tables, ", "))
 		}
 		if v.Distance > 0 {
-			output.WriteString(fmt.Sprintf("- Distance: %d\n", v.Distance))
+			fmt.Fprintf(&output, "- Distance: %d\n", v.Distance)
 		}
 		for _, g := range v.Groups {
-			output.WriteString(fmt.Sprintf("- Group: %s\n", g.Name))
+			fmt.Fprintf(&output, "- Group: %s\n", g.Name)
 			if g.Desc != "" {
-				output.WriteString(fmt.Sprintf("  - Description: %s\n", g.Desc))
+				fmt.Fprintf(&output, "  - Description: %s\n", g.Desc)
 			}
 			if len(g.Labels) > 0 {
-				output.WriteString(fmt.Sprintf("  - Labels: %s\n", strings.Join(g.Labels, ", ")))
+				fmt.Fprintf(&output, "  - Labels: %s\n", strings.Join(g.Labels, ", "))
 			}
 			if len(g.Tables) > 0 {
-				output.WriteString(fmt.Sprintf("  - Tables: %s\n", strings.Join(g.Tables, ", ")))
+				fmt.Fprintf(&output, "  - Tables: %s\n", strings.Join(g.Tables, ", "))
 			}
 			if g.Color != "" {
-				output.WriteString(fmt.Sprintf("  - Color: %s\n", g.Color))
+				fmt.Fprintf(&output, "  - Color: %s\n", g.Color)
 			}
 		}
 	}
