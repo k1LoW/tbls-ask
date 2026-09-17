@@ -1,5 +1,15 @@
 # Changelog
 
+## [v0.7.0](https://github.com/k1LoW/tbls-ask/compare/v0.6.10...v0.7.0) - 2026-09-17
+
+### Other Changes
+- chore(deps): bump google.golang.org/grpc from 1.79.3 to 1.82.1 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/79
+- feat: support OpenAI-compatible endpoints via OPENAI_BASE_URL by @kromiii in https://github.com/k1LoW/tbls-ask/pull/83
+- ci: pin GitHub Actions to full commit SHAs with pinact by @kromiii in https://github.com/k1LoW/tbls-ask/pull/84
+- fix: resolve staticcheck QF1012 warnings in templates by @kromiii in https://github.com/k1LoW/tbls-ask/pull/85
+- chore(deps): bump google.golang.org/grpc from 1.82.1 to 1.83.2 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/81
+- chore(deps): bump github.com/apache/thrift from 0.23.0 to 0.24.0 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/82
+
 ## [v0.6.10](https://github.com/k1LoW/tbls-ask/compare/v0.6.9...v0.6.10) - 2026-07-11
 
 ### Other Changes
