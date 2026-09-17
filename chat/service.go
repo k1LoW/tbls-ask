@@ -2,8 +2,6 @@ package chat
 
 import (
 	"context"
-	"fmt"
-	"strings"
 )
 
 type Service struct {
@@ -11,17 +9,7 @@ type Service struct {
 }
 
 func NewService(model string) (*Service, error) {
-	var client Client
-	var err error
-
-	if strings.HasPrefix(model, "gpt") || strings.HasPrefix(model, "o") {
-		client, err = NewOpenAIClient(model)
-	} else if strings.HasPrefix(model, "gemini") {
-		client, err = NewGeminiClient(model)
-	} else {
-		return nil, fmt.Errorf("unsupported model: %s", model)
-	}
-
+	client, err := NewOpenAIClient(model)
 	if err != nil {
 		return nil, err
 	}

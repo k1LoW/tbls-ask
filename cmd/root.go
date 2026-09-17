@@ -133,7 +133,7 @@ func init() {
 	rootCmd.Flags().StringSliceVarP(&includes, "include", "", []string{}, "tables to include")
 	rootCmd.Flags().StringSliceVarP(&excludes, "exclude", "", []string{}, "tables to exclude")
 	rootCmd.Flags().StringSliceVarP(&labels, "label", "", []string{}, "table labels to be included")
-	rootCmd.Flags().BoolVarP(&queryMode, "query", "q", false, "ask OpenAI for query using the datasource")
-	rootCmd.Flags().StringVarP(&model, "model", "m", "gpt-4o", "model to be used")
+	rootCmd.Flags().BoolVarP(&queryMode, "query", "q", false, "ask LLM for query using the datasource")
+	rootCmd.Flags().StringVarP(&model, "model", "m", "chat-latest", "model to be used")
 	rootCmd.Flags().IntVarP(&distance, "distance", "d", 1, "distance between tables to be included")
 }

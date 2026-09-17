@@ -2,39 +2,63 @@ package chat
 
 import (
 	"context"
-	"os"
 	"testing"
 )
 
 func TestNewService(t *testing.T) {
-	os.Setenv("OPENAI_API_KEY", "test-openai-key")
-	os.Setenv("GEMINI_API_KEY", "test-gemini-key")
+	t.Run("with OPENAI_API_KEY", func(t *testing.T) {
+		t.Setenv("OPENAI_API_KEY", "test-openai-key")
 
-	defer func() {
-		os.Unsetenv("OPENAI_API_KEY")
-		os.Unsetenv("GEMINI_API_KEY")
-	}()
+		tests := []struct {
+			name  string
+			model string
+		}{
+			{"GPT model alias", "chat-latest"},
+			{"O-series model", "o1-mini"},
+			{"Claude model via OpenRouter", "anthropic/claude-sonnet-latest"},
+			{"Gemini model via compatibility endpoint", "gemini-flash-latest"},
+			{"Custom local model", "my-custom-model"},
+		}
 
-	tests := []struct {
-		name    string
-		model   string
-		wantErr bool
-	}{
-		{"GPT model", "gpt-3.5-turbo", false},
-		{"GPT model with o", "o1-mini", false},
-		{"Gemini model", "gemini-pro", false},
-		{"Unsupported model", "unsupported-model", true},
-	}
+		for _, tt := range tests {
+			t.Run(tt.name, func(t *testing.T) {
+				_, err := NewService(tt.model)
+				if err != nil {
+					t.Errorf("NewService() error = %v, want nil", err)
+				}
+			})
+		}
+	})
 
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			_, err := NewService(tt.model)
-			if (err != nil) != tt.wantErr {
-				t.Errorf("NewService() error = %v, wantErr %v", err, tt.wantErr)
-				return
-			}
-		})
-	}
+	t.Run("with OPENAI_BASE_URL", func(t *testing.T) {
+		t.Setenv("OPENAI_API_KEY", "test-openai-key")
+		t.Setenv("OPENAI_BASE_URL", "https://openrouter.ai/api/v1")
+
+		_, err := NewService("anthropic/claude-sonnet-latest")
+		if err != nil {
+			t.Errorf("NewService() with OPENAI_BASE_URL error = %v, want nil", err)
+		}
+	})
+
+	t.Run("without API key", func(t *testing.T) {
+		t.Setenv("OPENAI_API_KEY", "")
+		t.Setenv("AZURE_OPENAI_ENDPOINT", "")
+
+		_, err := NewService("chat-latest")
+		if err == nil {
+			t.Errorf("NewService() want error when OPENAI_API_KEY is not set, got nil")
+		}
+	})
+
+	t.Run("with Azure OpenAI", func(t *testing.T) {
+		t.Setenv("AZURE_OPENAI_ENDPOINT", "https://test.openai.azure.com")
+		t.Setenv("AZURE_OPENAI_KEY", "test-azure-key")
+
+		_, err := NewService("my-deployment")
+		if err != nil {
+			t.Errorf("NewService() with Azure error = %v, want nil", err)
+		}
+	})
 }
 
 func TestService_Ask(t *testing.T) {

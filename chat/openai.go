@@ -44,8 +44,14 @@ func NewOpenAIClient(model string) (*OpenAIClient, error) {
 	if key == "" {
 		return nil, fmt.Errorf("OPENAI_API_KEY is not set")
 	}
+	config := openai.DefaultConfig(key)
+	if baseURL := os.Getenv("OPENAI_BASE_URL"); baseURL != "" {
+		config.BaseURL = baseURL
+	} else if apiBase := os.Getenv("OPENAI_API_BASE"); apiBase != "" {
+		config.BaseURL = apiBase
+	}
 	return &OpenAIClient{
-		client: openai.NewClient(key),
+		client: openai.NewClientWithConfig(config),
 		model:  model,
 	}, nil
 }
