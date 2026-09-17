@@ -100,7 +100,7 @@ $ tbls ask --dsn 'mysql://user:pass@localhost:3306/wordpress' --model google/gem
 ### Azure OpenAI
 
 ```console
-export AZURE_OPENAI_KEY=your_api_key
+export AZURE_OPENAI_KEY=your_api_key  # or AZURE_OPENAI_API_KEY
 export AZURE_OPENAI_ENDPOINT=your_endpoint
 export AZURE_OPENAI_MODEL=your_deployment_model
 export AZURE_OPENAI_API_VERSION=your_api_version
@@ -109,7 +109,7 @@ $ tbls ask --dsn 'mysql://user:pass@localhost:3306/wordpress' --model azure-open
 
 Azure OpenAI uses dedicated environment variables (`AZURE_OPENAI_*`) instead of `OPENAI_API_KEY` and `OPENAI_BASE_URL`:
 
-- `AZURE_OPENAI_KEY` ... (Required) API Key for Azure OpenAI.
+- `AZURE_OPENAI_KEY` or `AZURE_OPENAI_API_KEY` ... (Required) API Key for Azure OpenAI.
 - `AZURE_OPENAI_ENDPOINT` ... (Required) Endpoint URL (e.g. `https://<resource>.openai.azure.com`).
 - `AZURE_OPENAI_MODEL` ... (Optional) Deployment model name on Azure.
 - `AZURE_OPENAI_API_VERSION` ... (Optional) API version (e.g. `2024-02-15-preview`).
