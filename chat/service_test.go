@@ -59,17 +59,6 @@ func TestNewService(t *testing.T) {
 			t.Errorf("NewService() with Azure error = %v, want nil", err)
 		}
 	})
-
-	t.Run("with Azure OpenAI fallback (AZURE_OPENAI_API_KEY)", func(t *testing.T) {
-		t.Setenv("AZURE_OPENAI_ENDPOINT", "https://test.openai.azure.com")
-		t.Setenv("AZURE_OPENAI_KEY", "")
-		t.Setenv("AZURE_OPENAI_API_KEY", "test-azure-key")
-
-		_, err := NewService("my-deployment")
-		if err != nil {
-			t.Errorf("NewService() with Azure API key fallback error = %v, want nil", err)
-		}
-	})
 }
 
 func TestService_Ask(t *testing.T) {

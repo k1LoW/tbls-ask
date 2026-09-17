@@ -16,10 +16,7 @@ type OpenAIClient struct {
 func newAzureClient(model string) (*OpenAIClient, error) {
 	key := os.Getenv("AZURE_OPENAI_KEY")
 	if key == "" {
-		key = os.Getenv("AZURE_OPENAI_API_KEY")
-	}
-	if key == "" {
-		return nil, fmt.Errorf("AZURE_OPENAI_KEY (or AZURE_OPENAI_API_KEY) is not set")
+		return nil, fmt.Errorf("AZURE_OPENAI_KEY is not set")
 	}
 	c := openai.DefaultAzureConfig(key, os.Getenv("AZURE_OPENAI_ENDPOINT"))
 
