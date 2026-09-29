@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.7.1](https://github.com/k1LoW/tbls-ask/compare/v0.7.0...v0.7.1) - 2026-09-28
+
+### Other Changes
+- chore(deps): bump go.opentelemetry.io/otel/sdk from 1.44.0 to 1.45.0 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/86
+- ci: generate CREDITS with gocredits v1.0.0 from a make target by @k1LoW in https://github.com/k1LoW/tbls-ask/pull/88
+
 ## [v0.7.0](https://github.com/k1LoW/tbls-ask/compare/v0.6.10...v0.7.0) - 2026-09-17
 
 ### Other Changes
