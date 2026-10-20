@@ -100,7 +100,7 @@ require (
 	github.com/k1LoW/ghfs v1.5.1 // indirect
 	github.com/k1LoW/go-github-client/v67 v67.0.18 // indirect
 	github.com/klauspost/asmfmt v1.3.2 // indirect
-	github.com/klauspost/compress v1.18.0 // indirect
+	github.com/klauspost/compress v1.18.7 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.11 // indirect
 	github.com/lib/pq v1.10.9 // indirect
 	github.com/minio/asm2plan9s v0.0.0-20200509001527-cdd76441f9d8 // indirect
