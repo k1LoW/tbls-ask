@@ -1,5 +1,12 @@
 # Changelog
 
+## [v0.7.2](https://github.com/k1LoW/tbls-ask/compare/v0.7.1...v0.7.2) - 2026-11-18
+
+### Other Changes
+- chore(deps): bump github.com/klauspost/compress from 1.18.0 to 1.18.7 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/89
+- chore(deps): bump github.com/go-jose/go-jose/v4 from 4.1.4 to 4.1.6 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/90
+- chore(deps): bump go.opentelemetry.io/otel/sdk from 1.45.0 to 1.47.0 by @dependabot[bot] in https://github.com/k1LoW/tbls-ask/pull/91
+
 ## [v0.7.1](https://github.com/k1LoW/tbls-ask/compare/v0.7.0...v0.7.1) - 2026-09-28
 
 ### Other Changes
